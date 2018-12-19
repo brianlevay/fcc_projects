@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Request Header Parsing API Microservice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/header.css">
+  </head>
+  
+  <body>
+    
+    <div id="container">
+      <div id="header">
+        Request Header Parsing API
+      </div>
+      <div id="contentSect">
+        <div id="apiDesc">
+          <span class="heading">How to Use this API</span>
+          <span class="paragraphs">
+            This API returns details about the user's location and browser.
+          </span>
+          <span class="paragraphs">
+            <span class="subheading">To use the API via url, append the following: </span>
+            /api/ - to get your user details
+          </span>
+        </div>
+        <div id="apiTest">
+          <span class="heading">API Test Lab</span>
+          <span class="paragraphs">
+            You can also test the API by clicking the button below.
+          </span>
+          <button id="submitQuery" type="button" onsubmit="return false">
+            Send
+          </button>
+          <div id="outputSect">
+            No query submitted yet.
+          </div>
+        </div>
+      </div>
+      <div id="footerSect">
+        Created by Brian LeVay, July 2016 as part of the <a href="https://www.freecodecamp.com" target="_blank">FreeCodeCamp</a> curriculum
+      </div>
+    </div>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/header_client.js"></script>
+    
+  </body>
+  
+</html>

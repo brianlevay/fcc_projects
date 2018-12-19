@@ -1,0 +1,17 @@
+{
+  "name": "apis-fcc",
+  "version": "1.0.0",
+  "description": "A series of API endpoints built as part of the FreeCodeCamp curriculum",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": "",
+  "author": "Brian LeVay",
+  "dependencies": {
+    "express": "~3.2.4",
+    "multer": "^1.1.0",
+    "node-cache": "^3.2.1",
+    "pg": "^6.0.2"
+  }
+}

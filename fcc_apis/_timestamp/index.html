@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Timestamp API Microservice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/timestamp.css">
+  </head>
+  
+  <body>
+    
+    <div id="container">
+      <div id="header">
+        Timestamp API
+      </div>
+      <div id="contentSect">
+        <div id="apiDesc">
+          <span class="heading">How to Use this API</span>
+          <span class="paragraphs">
+            This API takes a date in the form of either a Unix timestamp (an integer that gives the number of seconds passed since January 1, 1970), or a natural language date, and it returns a JSON object with both values.
+          </span>
+          <span class="paragraphs">
+            <span class="subheading">Examples of Unix timestamps: </span>
+            1000000, 135420, -900000, etc.
+          </span>
+          <span class="paragraphs">
+            <span class="subheading">Examples of natural language dates: </span>
+            "February 2, 2015", "12 Mar 1999", "Oct-31-1916", etc.
+          </span>
+          <span class="paragraphs">
+            <span class="subheading">Examples of dates that won't work: </span>
+            "04/12/2001" - forward slashes not accepted, plus ambiguous day-month distinction<br>
+            "July 2nd, 2007" - the "nd" on the end of the number will flag the day as a word
+          </span>
+          <span class="paragraphs">
+            <span class="subheading">To use the API via url, append the following: </span>
+            /api/?date=100000 - to get a natural date from a Unix timestamp <br>
+            /api/?date=January 2, 2013 - to get a Unix timestamp from a natural date
+          </span>
+        </div>
+        <div id="apiTest">
+          <span class="heading">API Test Lab</span>
+          <span class="paragraphs">
+            You can also test the API by entering your queries directly into the box below. You <em>do not</em> need to use the '/api/?query=' prefix. Just type in your date.
+          </span>
+          <form>
+            <input id="queryText">
+          </form>
+          <button id="submitQuery" type="button" onsubmit="return false">
+            Send
+          </button>
+          <div id="outputSect">
+            No query submitted yet.
+          </div>
+        </div>
+      </div>
+      <div id="footerSect">
+        Created by Brian LeVay, July 2016 as part of the <a href="https://www.freecodecamp.com" target="_blank">FreeCodeCamp</a> curriculum
+      </div>
+    </div>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/timestamp_client.js"></script>
+    
+  </body>
+  
+</html>

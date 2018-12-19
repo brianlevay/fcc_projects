@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>URL Shortener API Microservice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/url.css">
+  </head>
+  
+  <body>
+    
+    <div id="container">
+      <div id="header">
+        URL Shortener API
+      </div>
+      <div id="contentSect">
+        <div id="apiDesc">
+          <span class="heading">How to Use this API</span>
+          <span class="paragraphs">
+            This API takes a query in the form of a URL, and it returns a path from this site that re-directs to the original location.
+          </span>
+          <span class="paragraphs">
+            <span class="subheading">To generate a new link via URL, append: </span>
+            /api/new?url=path (path is the full url of the site you want)
+          </span>
+          <span class="paragraphs">
+            <span class="subheading">To visit the linked website, append: </span>
+            /api/handle (handle is your short character set)
+          </span>
+          <span class="paragraphs">
+            <span class="subheading">Examples of appropriate query formats: </span>
+            https://www.google.com, http://codepen.io, https://example.com
+          </span>
+          <span class="paragraphs">
+            <span class="subheading">Examples of URLs that won't work: </span>
+            www.mysite.com (missing http://), http://gohere (missing extension)
+          </span>
+        </div>
+        <div id="apiTest">
+          <span class="heading">API Test Lab</span>
+          <span class="paragraphs">
+            You can also test the API by entering your URL directly into the box below. You <em>do not</em> need to use the '/api/new?url=' prefix. Just type in your date.
+          </span>
+          <form>
+            <input id="queryText">
+          </form>
+          <button id="submitQuery" type="button" onsubmit="return false">
+            Send
+          </button>
+          <div id="outputSect">
+            <a id="shortLink" class="outputLink" href="" target="_blank"></a><br>
+            <span id="message">No link generated yet.</span>
+          </div>
+        </div>
+      </div>
+      <div id="footerSect">
+        Created by Brian LeVay, July 2016 as part of the <a href="https://www.freecodecamp.com" target="_blank">FreeCodeCamp</a> curriculum
+      </div>
+    </div>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/url_client.js"></script>
+    
+  </body>
+  
+</html>

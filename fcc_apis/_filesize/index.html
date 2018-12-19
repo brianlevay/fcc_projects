@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>File Size API Microservice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/filesize.css">
+  </head>
+  
+  <body>
+    
+    <div id="container">
+      <div id="header">
+        File Size API
+      </div>
+      <div id="contentSect">
+        <div id="apiDesc">
+          <span class="heading">How to Use this API</span>
+          <span class="paragraphs">
+            This API allows you to upload a file, and it returns that file's size.
+          </span>
+        </div>
+        <div id="apiTest">
+          <span class="heading">File Upload</span>
+          <form id="fileForm" enctype="multipart/form-data" action="/upload/" method="post">
+            <input id="fileLoc" name="fileUpload" type="file" />
+          </form>
+          <button id="upload" type="button" onsubmit="return false">Upload</button>
+          <div id="outputSect">
+            <span class="subheading">File Size</span>
+            <span id="message"></span>
+          </div>
+        </div>
+      </div>
+      <div id="footerSect">
+        Created by Brian LeVay, July 2016 as part of the <a href="https://www.freecodecamp.com" target="_blank">FreeCodeCamp</a> curriculum
+      </div>
+    </div>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/filesize_client.js"></script>
+    
+  </body>
+  
+</html>

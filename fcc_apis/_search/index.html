@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Image Search API Microservice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/search.css">
+  </head>
+  
+  <body>
+    
+    <div id="container">
+      <div id="header">
+        Image Search API
+      </div>
+      <div id="contentSect">
+        <div id="apiDesc">
+          <span class="heading">How to Use this API</span>
+          <span class="paragraphs">
+            This API uses <a href="https://www.flickr.com" target="_blank">Flickr</a> to search for images. In addition, it can be used to get a list of the 10 most recent searches.
+          </span>
+          <span class="paragraphs">
+            <span class="subheading">To perform a new search via URL, append: </span>
+            /api/new?text=searchterms&?offset=pagenum <br><br>
+            Enter your search terms after "text=". Offset is an optional query parameter, and it represents the page number of the results that you want returned. The API only gets the first 100 results from Flickr, and the results are broken into pages with a maximum of 20 images.
+          </span>
+          <span class="paragraphs">
+            <span class="subheading">To see the most recent searches, append: </span>
+            /api/recent/
+          </span>
+        </div>
+        <div id="apiTest">
+          <span class="heading">API Test Lab</span>
+          <span class="paragraphs">
+            You can also test the API by entering your search terms directly into the box below, or by clicking one of the buttons. You <em>do not</em> need to use the '/api/new?text=' prefix.
+          </span>
+          <form>
+            <label for="queryText">Search Terms</label>
+            <input id="queryText">
+            <label for="pageNum">Page</label>
+            <input id="pageNum">
+          </form>
+          <button id="submitQuery" class="apiBtn" type="button" onsubmit="return false">
+            Send
+          </button>
+          <button id="getRecent" class="apiBtn" type="button" onsubmit="return false">
+            Recent
+          </button>
+          <div id="outputSect">
+            No queries made yet.
+          </div>
+        </div>
+      </div>
+      <div id="footerSect">
+        Created by Brian LeVay, July 2016 as part of the <a href="https://www.freecodecamp.com" target="_blank">FreeCodeCamp</a> curriculum
+      </div>
+    </div>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/search_client.js"></script>
+    
+  </body>
+  
+</html>

@@ -1,0 +1,102 @@
+/* DOM-level styles */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #b2b2b2;
+}
+
+a {
+  color: black;
+}
+
+.outputLink {
+  color: white;
+}
+/* Main page style */
+
+#container {
+  margin: auto;
+  width: 70%;
+  min-width: 300px;
+  padding: 20px;
+  background-color: white;
+}
+
+/* Page sections */
+
+#header {
+  padding: 8px;
+  font-size: 2.5em;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #50394c;
+  color: white;
+}
+
+#contentSect {
+}
+
+#footerSect {
+  padding: 5px;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+/* Sub-sections inside contentSect */
+
+#apiDesc {
+  margin: 10px;
+  padding: 5px 10px 5px 10px;
+  background-color: #f4e1d2;
+}
+
+#apiTest {
+  margin: 10px;
+  padding: 5px 10px 5px 10px;
+  background-color: #d6d4e0;
+}
+
+#queryText {
+  display: block;
+  width: 50%;
+  min-width: 200px;
+  margin: 2px 10px;
+}
+
+#submitQuery {
+  margin: 5px 10px;
+  height: 40px;
+  width: 90px;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: white;
+  border: 2px outset white;
+}
+
+#outputSect {
+  margin: 10px;
+  padding: 10px;
+  background-color: #50394c;
+  color: white;
+}
+
+/* These are styling classes for spans */
+
+.heading {
+  display: block;
+  margin: 4px;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.subheading {
+  display: block;
+  margin: 15px 0px 5px 0px;
+  font-weight: bold;
+}
+
+.paragraphs {
+  display: block;
+  margin: 10px;
+}
