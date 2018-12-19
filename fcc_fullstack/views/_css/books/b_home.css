@@ -1,0 +1,259 @@
+/* 
+Common template styles defined at the top,
+app-specific styles (#contentSect) at the bottom.
+Single color scheme across all pages:
+designschool.canva #43 Antique Tones
+bluebell #155765
+olive #57652a
+ornate (gold) #ab9353
+plum #4d2c3d
+*/
+/* variables */
+/* app-specific (content) styles */
+#contentSect {
+  margin: 10px; }
+
+/* This styles the root-level error banner */
+.error {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-weight: bold;
+  outline: 2px outset black; }
+
+/* This styles the root-level tab label section and its children */
+.tabLabelSect {
+  margin: auto;
+  margin-top: 5px;
+  text-align: center; }
+  .tabLabelSect .activeTabLabel {
+    display: inline-block;
+    width: 120px;
+    padding: 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    background-color: #57652a;
+    color: white; }
+  .tabLabelSect .inactiveTabLabel {
+    display: inline-block;
+    width: 120px;
+    padding: 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    background-color: #ab9353;
+    color: black; }
+
+/* This styles the main tab content container and its descendents, except for the book sections */
+.tabContents .tabHeader {
+  margin: 5px;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: "Permanent Marker", cursive; }
+
+.tabContents .appIntro {
+  margin: 5px;
+  padding: 10px; }
+
+/* These are some generic mixins */
+/* This styles the Profile section on the Profile tab, including all children */
+.profile {
+  border: 1px outset black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  background-color: #eeeeee; }
+  .profile .greeting {
+    margin: 5px 5px 10px 5px;
+    font-family: "Permanent Marker", cursive;
+    font-weight: bold;
+    font-size: 1.2em; }
+  .profile label {
+    margin-right: 10px; }
+  .profile input {
+    display: inline-block;
+    height: 2em;
+    margin: 0px 10px 10px 0px; }
+  .profile button {
+    display: block;
+    width: 135px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px outset;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 5px 0px 0px 0px;
+    background-color: #57652a;
+    border-color: #57652a;
+    color: white; }
+
+/* This styles the "add books" section of the Profile page, not including the suggested books */
+.addBooks {
+  border: 1px outset black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  background-color: #eeeeee; }
+  .addBooks .addBooksHeader {
+    margin: 5px 5px 10px 5px;
+    font-family: "Permanent Marker", cursive;
+    font-weight: bold;
+    font-size: 1.2em; }
+  .addBooks .searchSect .searchSubheader {
+    margin: 10px 0px 5px 0px; }
+  .addBooks .searchSect .searchInput {
+    display: inline-block;
+    width: 200px;
+    height: 2em;
+    margin: 0px 10px 10px 0px; }
+  .addBooks .searchSect .searchBtn {
+    display: block;
+    width: 135px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px outset;
+    font-size: 0.9em;
+    font-weight: bold;
+    display: inline-block;
+    background-color: #57652a;
+    border-color: #57652a;
+    color: white; }
+
+/* This styles everything within the book sections other than the books themselves */
+.bookSect {
+  border: 1px outset black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  background-color: white; }
+  .bookSect .bookSectHeader {
+    margin: 5px 5px 10px 5px;
+    font-family: "Permanent Marker", cursive;
+    font-weight: bold;
+    font-size: 1.2em; }
+  .bookSect .thumbSect .seeMore {
+    display: block;
+    width: 135px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px outset;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 5px 0px 0px 0px;
+    background-color: #57652a;
+    border-color: #57652a;
+    color: white; }
+  .bookSect .thumbSect .clearSuggested {
+    display: block;
+    width: 135px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px outset;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 5px 0px 0px 0px;
+    background-color: #57652a;
+    border-color: #57652a;
+    color: white; }
+  .bookSect .thumbSect .tradeForNone {
+    display: block;
+    width: 135px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px outset;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 5px 0px 0px 0px;
+    background-color: #57652a;
+    border-color: #57652a;
+    color: white; }
+
+/* Styles individual book thumbnails */
+.book {
+  border: 1px outset black;
+  border-radius: 5px;
+  display: inline-block;
+  width: 200px;
+  margin: 5px;
+  vertical-align: top;
+  text-align: center;
+  box-shadow: 2px 2px 2px black;
+  background-color: white; }
+  .book .behaviorA button {
+    display: block;
+    width: 135px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px outset;
+    font-size: 0.9em;
+    font-weight: bold;
+    background-color: #4d2c3d;
+    border-color: #4d2c3d;
+    color: white; }
+  .book .behaviorB button {
+    display: block;
+    width: 135px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px outset;
+    font-size: 0.9em;
+    font-weight: bold;
+    background-color: red;
+    border-color: red;
+    color: white; }
+  .book .thumbnail {
+    margin-bottom: 10px;
+    padding-top: 10px;
+    height: 220px;
+    overflow: hidden; }
+    .book .thumbnail a img {
+      outline: 1px solid black; }
+  .book .bookDetails .bookTitle {
+    margin: 3px 8px 3px 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: bold; }
+  .book .bookDetails .bookAuthors {
+    margin: 3px 8px 3px 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; }
+  .book .bookDetails .bookOwner {
+    margin: 3px 8px 3px 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.8em; }
+  .book .bookDetails .bookLocation {
+    margin: 3px 8px 3px 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.8em; }
+
+.highlight {
+  background-color: #eeeeee; }

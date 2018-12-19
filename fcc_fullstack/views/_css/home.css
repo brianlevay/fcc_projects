@@ -1,0 +1,78 @@
+/* 
+Common template styles defined at the top,
+app-specific styles (#contentSect) at the bottom.
+Single color scheme across all pages:
+designschool.canva #43 Antique Tones
+bluebell #155765
+olive #57652a
+ornate (gold) #ab9353
+plum #4d2c3d
+*/
+
+/* app-specific (content) styles */
+
+#contentSect {
+  position: relative;
+  margin: 10px;
+}
+
+#about {
+  position: relative;
+  margin: 20px;
+}
+
+.textHeader {
+  display: block;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+#projectSect {
+  display: table;
+  position: relative;
+}
+
+.project {
+  display: table-row;
+  position: relative;
+}
+
+.icon {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100px;
+  padding: 10px;
+  text-align: center;
+  color: #4d2c3d;
+}
+
+.appDesc {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.appName {
+  display: block;
+  font-size: 2.0em;
+  font-weight: bold;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.appName a {
+  color: #4d2c3d;
+  text-decoration: none;
+}
+
+/* media queries */
+
+@media(max-width: 600px) {
+  .appText {
+    display: none;
+  }
+}
+
+@media(min-width: 600px) {
+  .appText {
+    display: block;
+  }
+}

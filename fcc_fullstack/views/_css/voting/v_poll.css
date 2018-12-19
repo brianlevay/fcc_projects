@@ -1,0 +1,221 @@
+/* 
+Common template styles defined at the top,
+app-specific styles (#contentSect) at the bottom.
+Single color scheme across all pages:
+designschool.canva #43 Antique Tones
+bluebell #155765
+olive #57652a
+ornate (gold) #ab9353
+plum #4d2c3d
+twitter #00aced
+*/
+
+/* app-specific (content) styles */
+
+#contentSect {
+  position: relative;
+  margin: 10px;
+}
+
+.controls {
+  position: relative;
+  margin: 20px 0px 10px 0px;
+  text-align: center;
+}
+
+.changePage {
+  display: inline-block;
+  vertical-align: top;
+  width: 100px;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px outset #57652a;
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: #57652a;
+}
+
+.changePage a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.deleteForm {
+  display: inline-block;
+  vertical-align: top;
+  width: 100px;
+  padding: 3px 5px 4px 5px;
+  border-radius: 3px;
+  border: 1px outset #4d2c3d;
+  background-color: lightgray;
+  text-align: center;
+}
+
+#deletePoll {
+  display: inline;
+  padding: 0px;
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: red;
+  cursor: pointer;
+}
+
+.poll {
+  position: relative;
+}
+
+.pollTitle {
+  display: block;
+  font-size: 1.8em;
+  font-weight: bold;
+  font-family: 'Permanent Marker', cursive;
+  text-align: center;
+}
+
+.pollOwner {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.pollOwner a {
+  padding: 3px;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: #eeeeee;
+}
+
+.pollDetails {
+  display: block;
+}
+
+.numTitle {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  text-align: right;
+  width: 25%;
+  margin: 0px 10px 10px 0px;
+  font-weight: bold;
+}
+
+.optionTitle {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  text-align: left;
+  width: 25%;
+  margin: 0px 0px 10px 50px;
+  font-weight: bold;
+}
+
+.pollRow {
+  display: block;
+  text-align: center;
+}
+
+.barCont {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  width: 25%;
+  height: 35px;
+  margin: 0px 10px 0px 0px;
+}
+
+.bar {
+  display: inline-block;
+  position: absolute;
+  left: 100%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background-color: #ab9353; /* #4d2c3d #ab9353 */
+}
+
+.count {
+  display: inline-block;
+  vertical-align: middle;
+  width: 40px;
+  height: 30px;
+  margin: 0px 10px 0px 0px;
+  border: 0px;
+}
+
+.check {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px 10px 0px 0px;
+}
+
+.custom {
+  display: inline-block;
+  vertical-align: middle;
+  width: 25%;
+  height: 30px;
+  border: 0px;
+  outline: 1px solid gray;
+}
+
+label {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  width: 25%;
+  height: 35px;
+}
+
+.spacer {
+  display: block;
+  height: 0.5em;
+}
+
+#submitForm {
+  display: inline-block;
+  margin-top: 20px;
+  width: 150px;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px outset #4d2c3d;
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: #4d2c3d;
+  color: white;
+  cursor: pointer;
+}
+
+#twitterShare {
+  display: table;
+  width: 145px;
+  margin: auto;
+  margin-top: 20px;
+  color: white;
+  background-color: #00aced;
+  cursor: pointer;
+}
+
+#twitterLarge {
+  display: table-cell;
+  padding: 8px;
+  vertical-align: middle;
+  outline: 1px outset gray;
+}
+
+#shareLink {
+  display: table-cell;
+  padding: 8px;
+  vertical-align: middle;
+  color: white;
+  font-weight: bold;
+  font-size: 1em;
+  text-decoration: none;
+  outline: 1px outset gray;
+}
+
+

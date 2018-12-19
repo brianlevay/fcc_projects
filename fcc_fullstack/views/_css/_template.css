@@ -1,0 +1,196 @@
+/* 
+Common template styles defined at the top,
+app-specific styles (#contentSect) at the bottom.
+Single color scheme across all pages:
+designschool.canva #43 Antique Tones
+bluebell #155765
+olive #57652a
+ornate (gold) #ab9353
+plum #4d2c3d
+*/
+
+/* main template section styles */
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+  min-width: 400px;
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+
+a {
+  color: black;
+}
+
+#navSect {
+  display: table;
+  width: 100%;
+  border-spacing: 5px;
+  background-color: #ab9353;
+  cursor: pointer; /* added to allow menu to close on touch devices */
+}
+
+#headerSect {
+  padding: 8px;
+  text-align: center;
+  background-color: #155765;
+  color: white;
+}
+
+#footerSect {
+  padding: 5px;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+/* nav section styles */
+
+#dropBtn {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 5px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  overflow: visible;
+}
+
+#whoami {
+  display: table-cell;
+  vertical-align: middle;
+  width: 80%;
+  padding: 5px;
+  text-align: right;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#visitorLogin {
+  display: table-cell;
+  vertical-align: middle;
+  min-width: 100px;
+  padding: 5px;
+  background-color: #57652a;
+}
+
+#visitorForm {
+  font-size: 0px;
+}
+
+.loginInput {
+  display: none;
+}
+
+#visitorBtn {
+  display: inline-block;
+  width: 100%;
+  background-color: #57652a;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border: 0px;
+}
+
+#twitterLogin {
+  display: table-cell;
+  vertical-align: middle;
+  min-width: 100px;
+  padding: 5px;
+  text-align: center;
+  color: white;
+  background-color: #00aced;
+}
+
+#twitterLink {
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#twitterLogo {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#twitterWord {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#logout {
+  display: table-cell;
+  vertical-align: middle;
+  min-width: 100px;
+  padding: 5px;
+  background-color: #57652a;
+}
+
+#logoutLink {
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  border: 0px;
+}
+
+/* menu styles */
+
+#appMenu {
+  position: absolute;
+  left: 0px;
+  z-index: 100;
+  background-color: white;
+  display: none;
+  box-shadow: 2px 2px 2px black;
+}
+
+.menuLink {
+  display: block;
+  padding: 5px 5px 5px 15px;
+  text-align: left;
+  text-decoration: none;
+}
+
+.menuSpacer {
+  width: 120px;
+  height: 4px;
+}
+
+#dropBtn:hover > #appMenu {
+  display: block;
+}
+
+.inactiveLink {
+  text-decoration: none;
+}
+
+/* header section styles */
+
+.headerTitle {
+  display: block;
+  font-size: 2.5em;
+  font-weight: bold;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.headerSub {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* app-specific (content) styles */
+
+#contentSect {
+  margin: 10px;
+}

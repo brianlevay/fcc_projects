@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<title>Book Trading App (FCC)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <link rel="stylesheet" href="/_css/_template.css">
+    <link rel="stylesheet" href="/_css/books/b_home.css">
+	</head>
+	<body>
+		<div id="navSect">
+    	<div id="dropBtn">
+        <a class="inactiveLink" href="/" onclick="return false">Menu</a>
+        <div id="appMenu">
+          <div class="menuSpacer"></div>
+          <a class="menuLink" href="/">Home</a>
+          <a class="menuLink" href="/voting">Voting App</a>
+          <a class="menuLink" href="/nightlife">Nightlife App</a>
+          <a class="menuLink" href="/stocks">Stock Prices</a>
+          <a class="menuLink" href="/books">Book Trading</a>
+          <a class="menuLink" href="/pins">Photo Pins</a>
+      	</div>
+      </div>
+      <div id="whoami">
+	      <% if (!user) { %>
+					Welcome!
+				<% } else { %>
+					Hello, <%= user.username %>
+				<% } %>
+	    </div>
+      <% if (user) { %>
+	    	<div id="logout">
+	    		<a id="logoutLink" href="/logout">Logout</a>
+	    	</div>
+	    <% } %>
+	    <% if (!user) { %>
+				<div id="visitorLogin">
+	    		<form id="visitorForm" action="/login/visitor" method="post">
+	    			<input class="loginInput" type="hidden" name="username" value="test_user">
+	    			<input class="loginInput" type="hidden" name="password" value="test_user">
+	    			<button id="visitorBtn" type="submit">Test</button>
+	    		</form> 
+	    	</div>
+	    	<div id="twitterLogin">
+					<a id="twitterLink" href="/login/twitter">
+		      	<i id="twitterLogo" class="fa fa-twitter" aria-hidden="true"></i>
+			    	<span id="twitterWord">Login</span>
+		    	</a>
+				</div>
+			<% } %>
+    </div>
+    <div id="headerSect">
+    	<span class="headerTitle">Book Trading App</span>
+      <span class="headerSub">Offer to trade your books with other users</span>
+    </div>
+    
+    
+    <div id="contentSect">
+      
+	    
+    </div>
+    
+    
+    <div id="footerSect">
+      Created by Brian LeVay, August 2016 as part of the <a href="https://www.freecodecamp.com" target="_blank">FreeCodeCamp</a> curriculum
+    </div>
+    <script src="/_js/jquery.min.js"></script>
+    <script src='https://fb.me/react-15.1.0.min.js'></script>
+		<script src='https://fb.me/react-dom-15.1.0.min.js'></script>
+    <script src="/_js/books/b_home.js"></script>
+	</body>
+</html>
+

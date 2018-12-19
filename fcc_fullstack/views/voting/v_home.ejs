@@ -1,0 +1,104 @@
+<html>
+	<head>
+		<title>Voting App (FCC)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <link rel="stylesheet" href="/_css/_template.css">
+    <link rel="stylesheet" href="/_css/voting/v_home.css">
+	</head>
+	<body>
+		<div id="navSect">
+    	<div id="dropBtn">
+        <a class="inactiveLink" href="/" onclick="return false">Menu</a>
+        <div id="appMenu">
+          <div class="menuSpacer"></div>
+          <a class="menuLink" href="/">Home</a>
+          <a class="menuLink" href="/voting">Voting App</a>
+          <a class="menuLink" href="/nightlife">Nightlife App</a>
+          <a class="menuLink" href="/stocks">Stock Prices</a>
+          <a class="menuLink" href="/books">Book Trading</a>
+          <a class="menuLink" href="/pins">Photo Pins</a>
+      	</div>
+      </div>
+      <div id="whoami">
+	      <% if (!user) { %>
+					Welcome!
+				<% } else { %>
+					Hello, <%= user.username %>
+				<% } %>
+	    </div>
+      <% if (user) { %>
+	    	<div id="logout">
+	    		<a id="logoutLink" href="/logout">Logout</a>
+	    	</div>
+	    <% } %>
+	    <% if (!user) { %>
+				<div id="visitorLogin">
+	    		<form id="visitorForm" action="/login/visitor" method="post">
+	    			<input class="loginInput" type="hidden" name="username" value="test_user">
+	    			<input class="loginInput" type="hidden" name="password" value="test_user">
+	    			<button id="visitorBtn" type="submit">Test</button>
+	    		</form> 
+	    	</div>
+	    	<div id="twitterLogin">
+					<a id="twitterLink" href="/login/twitter">
+		      	<i id="twitterLogo" class="fa fa-twitter" aria-hidden="true"></i>
+			    	<span id="twitterWord">Login</span>
+		    	</a>
+				</div>
+			<% } %>
+    </div>
+    <div id="headerSect">
+    	<span class="headerTitle">Voting App</span>
+      <span class="headerSub">Make your own polls!</span>
+    </div>
+    
+    
+    <div id="contentSect">
+    	
+      <div class="controls">
+        <div class="changePage"><a href="/voting/create">New</a></div>
+        <% if (user) { %>
+        	<div class="changePage"><a href="/voting/profile/<%= user.username %>">Profile</a></div>
+        <% } %>	
+      </div>
+      
+    	<div class="pollSect">
+    	  <% if (user) { %>
+    		  <div class="pollSectHeader">Welcome, <%= user.username %>!</div>
+    	  <% } else { %>
+    	    <div class="pollSectHeader">Welcome!</div>
+    		<% } %>
+    		<div class="pollSectSubheader">Please check out the list of polls below. Vote on your favorites, or create your own.</div>
+    		
+	    	<% for (var i=0; i < entries.length; i++) { %>
+	    		<% var title = entries[i].poll.title;
+	    			var options = entries[i].poll.options; %>
+	    		<div class="pollPreview">
+	    			<div class="changePage view"><a href="/voting/poll/<%= entries[i].pid %>">View</a></div>
+	    			<div class="pollTitle"><%= title %></div>
+	    			<div class="pollCreator"><a href="/voting/profile/<%= entries[i].username %>"><%= entries[i].username %></a></div>
+	          <div class="voteSum">Votes: 
+	          	<% var tot = 0;
+	          	for (var j=0; j < options.length; j++) {
+	          		var name = Object.keys(options[j])[0]; 
+	          		var count = parseInt(options[j][name]); 
+	          		tot += count;
+	          	} %>
+	          	<span><%= tot %></span>
+	         	</div>
+	        </div>
+	      <% }; %>
+	      
+	    </div>
+	    
+    </div>
+    
+    
+    <div id="footerSect">
+      Created by Brian LeVay, August 2016 as part of the <a href="https://www.freecodecamp.com" target="_blank">FreeCodeCamp</a> curriculum
+    </div>
+	</body>
+</html>
+

@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<title>Stock App (FCC)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <link rel="stylesheet" href="/_css/_template.css">
+    <link rel="stylesheet" href="/_css/stocks/s_home.css">
+	</head>
+	<body>
+		<div id="navSect">
+    	<div id="dropBtn">
+        <a class="inactiveLink" href="/" onclick="return false">Menu</a>
+        <div id="appMenu">
+          <div class="menuSpacer"></div>
+          <a class="menuLink" href="/">Home</a>
+          <a class="menuLink" href="/voting">Voting App</a>
+          <a class="menuLink" href="/nightlife">Nightlife App</a>
+          <a class="menuLink" href="/stocks">Stock Prices</a>
+          <a class="menuLink" href="/books">Book Trading</a>
+          <a class="menuLink" href="/pins">Photo Pins</a>
+      	</div>
+      </div>
+      <div id="whoami">
+	      <% if (!user) { %>
+					Welcome!
+				<% } else { %>
+					Hello, <%= user.username %>
+				<% } %>
+	    </div>
+      <% if (user) { %>
+	    	<div id="logout">
+	    		<a id="logoutLink" href="/logout">Logout</a>
+	    	</div>
+	    <% } %>
+	    <% if (!user) { %>
+				<div id="visitorLogin">
+	    		<form id="visitorForm" action="/login/visitor" method="post">
+	    			<input class="loginInput" type="hidden" name="username" value="test_user">
+	    			<input class="loginInput" type="hidden" name="password" value="test_user">
+	    			<button id="visitorBtn" type="submit">Test</button>
+	    		</form> 
+	    	</div>
+	    	<div id="twitterLogin">
+					<a id="twitterLink" href="/login/twitter">
+		      	<i id="twitterLogo" class="fa fa-twitter" aria-hidden="true"></i>
+			    	<span id="twitterWord">Login</span>
+		    	</a>
+				</div>
+			<% } %>
+    </div>
+    <div id="headerSect">
+    	<span class="headerTitle">Stock App</span>
+      <span class="headerSub">See prices for your favorite stocks</span>
+    </div>
+    
+    
+    <div id="contentSect">
+      
+      <div class="chartSect">
+        <div class="chartTitle">Closing Stock Prices Over The Last Year</div>
+        <div id="tool">Click on a stock to see the price</div>
+        <svg class="chart" viewBox="0 0 600 300" preserveAspectRatio="xMidYMid meet">
+        </svg>
+      </div>
+      
+      <div class="stockSect">
+        <div class="addStock">
+          <div id="message">Please enter a stock code</div>
+          <form id="newForm" action="" onclick="return false">
+        	  <input id="stockNew"><button id="sendNew">Send</button>
+          </form>
+          <div id="warning"></div>
+        </div>
+        <div class="stockList"></div>
+      </div>
+      
+    </div>
+    
+    
+    <div id="footerSect">
+      Created by Brian LeVay, August 2016 as part of the <a href="https://www.freecodecamp.com" target="_blank">FreeCodeCamp</a> curriculum
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/_js/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+    <script src="/_js/stocks/s_home.js"></script>
+	</body>
+</html>
+

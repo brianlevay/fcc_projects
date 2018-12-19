@@ -1,0 +1,105 @@
+/* 
+Common template styles defined at the top,
+app-specific styles (#contentSect) at the bottom.
+Single color scheme across all pages:
+designschool.canva #43 Antique Tones
+bluebell #155765
+olive #57652a
+ornate (gold) #ab9353
+plum #4d2c3d
+*/
+/* variables */
+/* app-specific (content) styles */
+#contentSect {
+  margin: 10px; }
+
+.chartSect {
+  position: relative;
+  text-align: center; }
+  .chartSect .chartTitle {
+    margin-bottom: 10px;
+    font-size: 1.8em;
+    font-weight: bold;
+    font-family: 'Permanent Marker', cursive; }
+  .chartSect #tool {
+    display: inline-block;
+    position: relative;
+    margin: 5px;
+    padding: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    background-color: #eeeeee;
+    border-radius: 4px; }
+  .chartSect .chart {
+    display: block;
+    position: relative;
+    width: 90vw;
+    height: 45vw;
+    /* based on 50% aspect ratio */
+    margin: auto;
+    margin-top: 10px;
+    outline: 2px outset black; }
+  .chartSect .xAxis {
+    font-size: 0.5em; }
+    .chartSect .xAxis path,
+    .chartSect .xAxis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges; }
+  .chartSect .yAxis {
+    font-size: 0.5em; }
+    .chartSect .yAxis path,
+    .chartSect .yAxis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges; }
+  .chartSect .axisLabel {
+    font-size: 0.6em; }
+  .chartSect .chartLine {
+    fill: none;
+    stroke-width: 1.5px; }
+
+.stockSect {
+  margin: auto;
+  margin-top: 20px;
+  text-align: center; }
+  .stockSect .addStock {
+    display: block;
+    margin: 5px; }
+    .stockSect .addStock #message {
+      margin: 5px;
+      font-size: 1.1em;
+      font-family: 'Permanent Marker', cursive; }
+    .stockSect .addStock button {
+      display: block;
+      margin: auto;
+      margin-top: 20px;
+      width: 150px;
+      padding: 5px;
+      border-radius: 3px;
+      border: 1px outset #4d2c3d;
+      font-size: 1.2em;
+      font-weight: bold;
+      background-color: #4d2c3d;
+      color: white;
+      cursor: pointer; }
+    .stockSect .addStock #warning {
+      margin: 3px;
+      color: gray;
+      font-style: italic; }
+  .stockSect .stockList {
+    display: block;
+    margin: 5px; }
+    .stockSect .stockList .stock {
+      display: inline-block;
+      width: 100px;
+      margin: 5px; }
+      .stockSect .stockList .stock .stockName {
+        font-size: 1.2em;
+        font-weight: bold; }
+      .stockSect .stockList .stock .delete {
+        font-size: 0.7em;
+        padding: 3px;
+        font-weight: bold;
+        background-color: #ab9353;
+        border-radius: 3px; }

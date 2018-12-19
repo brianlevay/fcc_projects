@@ -1,0 +1,130 @@
+<html>
+	<head>
+		<title>Full-Stack Projects (FCC)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <link rel="stylesheet" href="/_css/_template.css">
+    <link rel="stylesheet" href="/_css/home.css">
+	</head>
+	<body>
+		<div id="navSect">
+    	<div id="dropBtn">
+        <a class="inactiveLink" href="/" onclick="return false">Menu</a>
+        <div id="appMenu">
+          <div class="menuSpacer"></div>
+          <a class="menuLink" href="/">Home</a>
+          <a class="menuLink" href="/voting">Voting App</a>
+          <a class="menuLink" href="/nightlife">Nightlife App</a>
+          <a class="menuLink" href="/stocks">Stock Prices</a>
+          <a class="menuLink" href="/books">Book Trading</a>
+          <a class="menuLink" href="/pins">Photo Pins</a>
+      	</div>
+      </div>
+      <div id="whoami">
+	      <% if (!user) { %>
+					Welcome!
+				<% } else { %>
+					Hello, <%= user.username %>
+				<% } %>
+	    </div>
+      <% if (user) { %>
+	    	<div id="logout">
+	    		<a id="logoutLink" href="/logout">Logout</a>
+	    	</div>
+	    <% } %>
+	    <% if (!user) { %>
+				<div id="visitorLogin">
+	    		<form id="visitorForm" action="/login/visitor" method="post">
+	    			<input class="loginInput" type="hidden" name="username" value="test_user">
+	    			<input class="loginInput" type="hidden" name="password" value="test_user">
+	    			<button id="visitorBtn" type="submit">Test</button>
+	    		</form> 
+	    	</div>
+	    	<div id="twitterLogin">
+					<a id="twitterLink" href="/login/twitter">
+		      	<i id="twitterLogo" class="fa fa-twitter" aria-hidden="true"></i>
+			    	<span id="twitterWord">Login</span>
+		    	</a>
+				</div>
+			<% } %>
+    </div>
+    <div id="headerSect">
+    	<span class="headerTitle">Full-Stack Projects</span>
+      <span class="headerSub">Brian LeVay - Free Code Camp</span>
+    </div>
+    
+    
+    <div id="contentSect">
+    	
+      <div id="about">
+		    <span class="textHeader">About This Site</span>
+		    Welcome to the home page for my full-stack web apps. All five of the apps that you'll find on this site were built as part of the Free Code Camp curriculum, and were built using Node.js, Express, and PostgreSQL. This site and the apps within it use a mixture of traditional server-side rendering and client-side rendering, and the source code can be found <a href="https://github.com/brianlevay/fcc_fullstack" target="_blank">here</a> on GitHub. 
+		  </div>
+		  
+		  <div id="projectSect">
+		    <div class="project">
+		      <div class="icon"><i class="fa fa-check-square-o fa-4x" aria-hidden="true"></i></div>
+		      <div class="appDesc">
+		        <div class="appName"><a href="/voting">Voting App</a></div>
+		        <div class="appText">
+		        	An app where users can create new polls and cast their votes on existing ones.<br>
+		        	<b>DEVELOPER NOTES:</b> This is a classic server-templated web page with minimal client-side Javascript.<br>
+		        </div>
+		      </div>
+		    </div>
+		    
+		    <div class="project">
+		      <div class="icon"><i class="fa fa-glass fa-4x" aria-hidden="true"></i></div>
+		      <div class="appDesc">
+		        <div class="appName"><a href="/nightlife">Nightlife App</a></div>
+		        <div class="appText">
+		        	An app where users can search for bars, tell others that they're going, and see who else will be there. Powered by the Yelp API.<br>
+		        	<b>DEVELOPER NOTES:</b> This is a single-page app that only uses JQuery for client-side rendering.<br>
+		        </div>
+		      </div>
+		    </div>
+		    
+		    <div class="project">
+		      <div class="icon"><i class="fa fa-line-chart fa-4x" aria-hidden="true"></i></div>
+		      <div class="appDesc">
+		        <div class="appName"><a href="/stocks">Stock Viewer</a></div>
+		        <div class="appText">
+		        	An app where users can see stock prices over the last year. When stocks are added or removed, all visitors can see the changes. Powered by the Quandl API.<br>
+		        	<b>DEVELOPER NOTES:</b> This app uses websockets for real-time updates and JQuery + the D3.js library for client-side rendering.<br>
+		        </div>
+		      </div>
+		    </div>
+		    
+		    <div class="project">
+		      <div class="icon"><i class="fa fa-book fa-4x" aria-hidden="true"></i></div>
+		      <div class="appDesc">
+		        <div class="appName"><a href="/books">Book Trading Club</a></div>
+		        <div class="appText">
+		        	An app where users can add copies of books that they own and trade them "virtually" with other users. Powered by the Google Books API.<br>
+		        	<b>DEVELOPER NOTES:</b> This is a single-page app built using React.js and JQuery for client-side rendering.<br>
+		        </div>
+		      </div>
+		    </div>
+		    
+		    <div class="project">
+		      <div class="icon"><i class="fa fa-picture-o fa-4x" aria-hidden="true"></i></div>
+		      <div class="appDesc">
+		        <div class="appName"><a href="/pins">Photo Pinning App</a></div>
+		        <div class="appText">
+		        	An app where users can pin links to their favorite photos from around the internet.<br>
+		        	<b>DEVELOPER NOTES:</b> This is a single-page app built using React.js and JQuery. It also uses custom hash-routing for easier navigation and external links.<br>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		  
+    </div>
+    
+    
+    <div id="footerSect">
+      Created by Brian LeVay, August 2016 as part of the <a href="https://www.freecodecamp.com" target="_blank">FreeCodeCamp</a> curriculum
+    </div>
+	</body>
+</html>
+

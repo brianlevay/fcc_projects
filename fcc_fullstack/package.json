@@ -1,0 +1,35 @@
+{
+  "name": "fullstack-fcc",
+  "version": "1.0.0",
+  "description": "A project containing all of the fullstack javascript apps required for the Free Code Camp curriculum",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "compile-jsx": "babel ./views/_jsx --out-dir ./views/_js",
+    "compile-scss": "node-sass ./views/_scss -o ./views/_css",
+    "compile": "npm run compile-jsx && npm run compile-scss"
+  },
+  "repository": "https://github.com/brianlevay/fcc_fullstack",
+  "author": "Brian LeVay",
+  "devDependencies": {
+    "babel-cli": "^6.0.0",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-preset-es2015": "^6.13.2",
+    "node-sass": "^3.8.0"
+  },
+  "dependencies": {
+    "async": "~0.2.8",
+    "connect-pg-simple": "^3.1.0",
+    "ejs": "^2.5.1",
+    "express": "~3.2.4",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0", 
+    "passport-twitter": "^1.0.4",
+    "pg": "^6.0.3",
+    "socket.io": "~0.9.14",
+    "yelp": "^1.0.1"
+  },
+  "engines": {
+    "node": "~4.4.5"
+  }
+}

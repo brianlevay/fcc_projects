@@ -1,0 +1,99 @@
+/* 
+Common template styles defined at the top,
+app-specific styles (#contentSect) at the bottom.
+Single color scheme across all pages:
+designschool.canva #43 Antique Tones
+bluebell #155765
+olive #57652a
+ornate (gold) #ab9353
+plum #4d2c3d
+*/
+
+/* app-specific (content) styles */
+
+#contentSect {
+  margin: 10px;
+}
+
+.controls {
+  position: relative;
+  margin: 20px 0px 10px 0px;
+  text-align: center;
+}
+
+.changePage {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  width: 100px;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px outset #57652a;
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: #57652a;
+}
+
+.changePage a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.pollSectHeader {
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: bold;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.pollSectSubheader {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.pollPreview {
+  vertical-align: top;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #eeeeee;
+}
+
+.view {
+  background-color: #4d2c3d;
+}
+
+.pollTitle {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px 10px 0px 10px;
+  font-size: 1.6em;
+  font-weight: bold;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.pollCreator {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px 10px 0px 10px;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.pollCreator a {
+  padding: 3px;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: #ab9353;
+  color: white;
+}
+
+.voteSum {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+

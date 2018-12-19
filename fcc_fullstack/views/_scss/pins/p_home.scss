@@ -1,0 +1,347 @@
+/* 
+Common template styles defined at the top,
+app-specific styles (#contentSect) at the bottom.
+Single color scheme across all pages:
+designschool.canva #43 Antique Tones
+bluebell #155765
+olive #57652a
+ornate (gold) #ab9353
+plum #4d2c3d
+*/
+
+/* variables */
+
+$imageWidth: 200px;
+
+$fancyFont: 'Permanent Marker', cursive;
+$sectionMargin: 5px;
+$sectionPadding: 10px;
+
+/* button colors */
+
+$seeMoreColor: #57652a;
+$seeMoreColorTxt: white;
+$createBtnColor: #57652a;
+$createBtnColorTxt: white;
+$deleteWallColor: red;
+$deleteWallColorTxt: white;
+$addBtnColor: #57652a;
+$addBtnColorTxt: white;
+$removePinColor: #155765;
+$removePinColorTxt: white;
+
+/* div colors */
+
+$wallPreviewHeaderColor: #4d2c3d;
+$wallPreviewHeaderColorTxt: white;
+$wallPreviewSubColor: #eeeeee;
+$wallPreviewSubColorTxt: black;
+$createWallColor: #eeeeee;
+$createWallColorTxt: black;
+$addPinColor: #eeeeee;
+$addPinColorTxt: black;
+$commentColor: #ab9353;
+$commentColorTxt: black;
+
+/* These are some generic mixins */
+
+@mixin genericBtn {
+	display: block;
+  width: 135px;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px outset;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+@mixin inlineBtn {
+	display: inline-block;
+	vertical-align: middle;
+  width: 135px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px outset;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+@mixin genericBorder {
+	border: 1px outset black;
+	border-radius: 5px;
+}
+
+@mixin genericHeader {
+	margin: 5px;
+	padding: 5px;
+	font-family: $fancyFont;
+	font-weight: bold;
+	font-size: 1.5em;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+@mixin genericSubheader {
+	margin: 5px;
+	padding: 5px;
+	font-family: $fancyFont;
+	font-weight: bold;
+	font-size: 1.2em;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+@mixin genericLabel {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 5px 10px 5px 10px;
+	font-weight: bold;
+}
+
+@mixin genericInput {
+	display: inline-block;
+	vertical-align: middle;
+	height: 2em;
+	width: 200px;
+	margin: 5px;
+}
+
+/* app-specific (content) styles */
+
+#contentSect {
+  margin: 10px;
+}
+
+/* This styles the root-level error banner */
+
+.error {
+	margin-bottom: 10px;
+	padding: 10px;
+	font-weight: bold;
+	outline: 2px outset black;
+}
+
+/* This styles the root-level tab label section and its children */
+
+.tabLabelSect {
+	margin: auto;
+	margin-top: 5px;
+	text-align: center;
+	
+	@mixin tabLabel {
+		display: inline-block;
+		width: 120px;
+		padding: 5px;
+		font-size: 1.2em;
+		font-weight: bold;
+		text-align: center;
+  }
+  
+  .activeTabLabel {
+  	@include tabLabel;
+  	background-color: #57652a;
+  	color: white;
+  }
+  
+  .inactiveTabLabel {
+  	@include tabLabel;
+  	background-color: #ab9353;
+  	color: black;
+  }
+}
+
+/* This styles the basic tab shell and headers for HomeTab, UserTab, and WallTab [1] */
+
+.tabContents {
+	
+	.tabHeader {
+		margin: $sectionMargin;
+		text-align: center;
+		font-size: 1.6em;
+		font-weight: bold;
+		font-family: $fancyFont;
+	}
+	
+	.tabSubheader {
+		margin: $sectionMargin;
+		text-align: center;
+		font-size: 1.2em;
+		font-weight: bold;
+		font-family: $fancyFont;
+		
+		span {
+			display: inline-block;
+			margin: 5px;
+			padding: 5px;
+			background-color: #eeeeee;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	}
+	
+	.appIntro {
+		margin: $sectionMargin;
+		padding: $sectionPadding;
+	}
+	
+}
+
+/* This styles the two buttons that sit in HomeTab and UserTab [1] */
+
+.seeMore {
+	@include genericBtn;
+	background-color: $seeMoreColor;
+	border-color: $seeMoreColor;
+	color: $seeMoreColorTxt;
+}
+
+.deleteWall {
+	@include genericBtn;
+	background-color: $deleteWallColor;
+	border-color: $deleteWallColor;
+	color: $deleteWallColorTxt;
+}
+
+/* This styles the CreateWall [2] component and its children */
+
+.createWall {
+	@include genericBorder;
+	margin: $sectionMargin;
+	padding: $sectionPadding;
+	background-color: $createWallColor;
+	color: $createWallColorTxt;
+	
+	.createWallHeader {
+		@include genericSubheader;
+		text-align: left;
+	}
+	
+	label {
+		@include genericLabel;
+	}
+	
+	input {
+		@include genericInput;
+	}
+	
+	button {
+		@include inlineBtn;
+		background-color: $createBtnColor;
+		color: $createBtnColorTxt;
+	}
+}
+
+/* This styles the AddPin [2] component and its children */
+
+.addPin {
+	@include genericBorder;
+	margin: $sectionMargin;
+	padding: $sectionPadding;
+	background-color: $addPinColor;
+	color: $addPinColorTxt;
+	
+	.addPinHeader {
+		@include genericSubheader;
+		text-align: left;
+	}
+	
+	.addPinInputSect {
+		
+		label {
+			@include genericLabel;
+		}
+	
+		input {
+			@include genericInput;
+		}
+		
+		button {
+			@include inlineBtn;
+			background-color: $addBtnColor;
+			color: $addBtnColorTxt;
+		}
+	}
+}
+
+/* This styles the WallSet [2] component and its children, excluding the ViewPin component */
+
+.wallSet {
+	
+	.wallPreview {
+		@include genericBorder;
+		margin: $sectionMargin;
+		padding: $sectionPadding;
+		
+		.wallPreviewHeader {
+			@include genericHeader;
+			text-align: center;
+			background-color: $wallPreviewHeaderColor;
+			color: $wallPreviewHeaderColorTxt;
+		}
+		
+		.wallPreviewSubheader {
+			@include genericSubheader;
+			text-align: center;
+			background-color: $wallPreviewSubColor;
+			color: $wallPreviewSubColorTxt;
+		}
+	}
+}
+
+/* This styles the FullWall [2] component and its children, excluding the ViewPin component */
+
+.fullWall {
+	@include genericBorder;
+	margin: $sectionMargin;
+	padding: $sectionPadding;
+}
+
+/* This styles the ViewPin [3/4] component and its children */
+
+.pin {
+	@include genericBorder;
+	display: inline-block;
+	margin: $sectionMargin;
+	width: $imageWidth + 2*$sectionMargin;
+	vertical-align: top;
+	box-shadow: 2px 2px 2px black;
+	
+	button {
+		@include genericBtn;
+		background-color: $removePinColor;
+		color: $removePinColorTxt;
+	}
+	
+	.imageDiv {
+		width: $imageWidth;
+		margin: $sectionMargin;
+		
+		img {
+			display: block;
+			max-width: $imageWidth;
+			height: auto;
+			margin: auto;
+		}
+	}
+	
+	.comment {
+		margin: $sectionMargin;
+		padding: $sectionPadding;
+		background-color: $commentColor;
+		color: $commentColorTxt;
+	}
+	
+	.creator {
+		margin: $sectionMargin;
+		padding: 2px 10px 2px 10px;
+		font-weight: bold;
+		font-size: 0.9em;
+	}
+}
+
+
+

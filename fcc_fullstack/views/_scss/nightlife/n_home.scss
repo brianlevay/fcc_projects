@@ -1,0 +1,242 @@
+/* 
+Common template styles defined at the top,
+app-specific styles (#contentSect) at the bottom.
+Single color scheme across all pages:
+designschool.canva #43 Antique Tones
+bluebell #155765
+olive #57652a
+ornate (gold) #ab9353
+plum #4d2c3d
+*/
+
+/* variables */
+
+$small-media: "(max-width: 600px)";
+
+/* app-specific (content) styles */
+
+#contentSect {
+  margin: 10px;
+}
+
+#searchSect {
+  position: relative;
+  margin: 20px 0px 10px 0px;
+  text-align: center;
+}
+  
+.barSectHeader {
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: bold;
+  font-family: 'Permanent Marker', cursive;
+}
+  
+#searchBar {
+	display: block;
+	margin: auto;
+	margin-top: 10px;
+	text-align: center;
+}
+  	
+#searchLoc {
+	display: block;
+	height: 30px;
+	width: 250px;
+	margin: auto;
+	border-radius: 5px;
+}
+  	
+#searchBtn {
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+  width: 150px;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px outset #4d2c3d;
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: #4d2c3d;
+  color: white;
+  cursor: pointer;
+}
+
+.barSectSubheader {
+	text-align: center;
+ 	font-size: 1.1em;
+}
+
+#barSect {
+}
+	
+.barPreview {
+	vertical-align: top;
+	margin: 5px;
+	padding: 10px;
+	border-radius: 5px;
+	background-color: #eeeeee;
+}  
+	  
+.thumbnailDiv {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 20px;
+}
+
+.barDetails {
+	display: inline-block;
+	vertical-align: middle;
+	
+	.barName {
+		display: block;
+		margin: 5px;
+		font-size: 1.8em;
+	  font-weight: bold;
+	  font-family: 'Permanent Marker', cursive;
+	
+		a {
+	    text-decoration: none;
+	  }
+	} 	
+	    	
+	.ratingDiv {
+		display: block;
+		margin-left: 5px;
+		
+		.reviewCt {
+			display: inline-block;
+		}
+	}
+}
+
+.snippetDiv {
+	display: block;
+	margin: 10px 0px 10px 0px;
+	
+	.snippet {
+		font-size: 1em;
+	}
+	
+	.moreLink {
+		padding: 3px;
+		font-weight: bold;
+		background-color: white;
+		text-decoration: none;
+	}
+} 	
+	  	
+.bar_id {
+	display: none;
+}
+	  
+.going {
+	display: inline-block;
+	padding: 5px;
+	text-align: left;
+	background-color: white;
+	border-radius: 3px;
+	
+	.goingTitle {
+		display: inline-block;
+		margin-right: 10px;
+		font-size: 1.2em;
+		font-weight: bold;
+		
+		@media #{$small-media} {
+			display: none;
+		}
+	}
+	
+	@mixin day {
+		position: relative;
+		display: inline-block;
+		width: 120px;
+		padding: 5px;
+		font-size: 0.9em;
+		font-weight: bold;
+		text-align: center;
+		border-radius: 5px;
+		background-color: #57652a;
+		color: white;
+		
+		@media #{$small-media} {
+			width: 80px;
+			font-size: 0.7em;
+		}
+	}
+	
+	.today {
+		@include day;
+	}
+	
+	.tomorrow {
+		@include day;
+	}
+		  	
+	.next {
+		@include day;
+	}
+		  	
+	.tally {
+		display: block;
+		width: 100%;
+		text-align: center;
+	}
+	
+	@mixin respond {
+		display: block;
+		width: 100%;
+		padding: 5px 0px 5px 0px;
+		font-weight: bold;
+		text-align: center;
+		color: black;
+		background-color: #ab9353;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	
+	.going {
+		@include respond;
+		color: white;
+		background-color: #4d2c3d;
+	}
+	
+	.not-going {
+		@include respond;
+	}
+	
+	.listSect {
+		display: none;
+	}
+	
+}
+
+#showList {
+	display: none;
+	position: absolute;
+	overflow: auto;
+	top: 0;
+	left: 0;
+	height: 5.0em;
+	min-width: 120px;
+	background-color: white;
+	padding: 5px;
+	font-size: 0.9em;
+	outline: 1px solid black;
+	
+	@media #{$small-media} {
+		min-width: 80px;
+		font-size: 0.7em;
+	}
+}
+
+.person {
+	display: block;
+	position: relative;
+}
+
+.attributeYelp {
+	display: block;
+	text-align: center;
+}
