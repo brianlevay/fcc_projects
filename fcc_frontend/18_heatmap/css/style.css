@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #2c7bb6;
+}
+body #page {
+  width: 70%;
+  margin: auto;
+  padding: 0px 50px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 3px 3px 3px black;
+}
+body #page #header {
+  text-align: center;
+  padding: 20px;
+}
+body #page #header #mainTitle {
+  font-size: 40px;
+  font-weight: bold;
+  font-variant: small-caps;
+}
+body #page #header #subTitle {
+  font-size: 20px;
+  font-weight: bold;
+  font-variant: small-caps;
+}
+body #page #chartSect .chart {
+  background: #f5f5f5;
+  width: 100%;
+  height: 100%;
+}
+body #page #chartSect .chart .axis text {
+  font-size: 14px;
+}
+body #page #chartSect .chart .axis path, body #page #chartSect .chart .axis line {
+  fill: none;
+  stroke: #000;
+}
+body #page #chartSect .chart .axisLabel {
+  font-size: 18px;
+  font-weight: bold;
+}
+body #page #footer {
+  padding: 20px 20px 20px 20px;
+  text-align: center;
+  font-size: 15px;
+}
+body #page #footer a {
+  color: black;
+}

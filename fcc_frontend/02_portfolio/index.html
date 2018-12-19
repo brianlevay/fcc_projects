@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Build a Personal Portfolio - FreeCodeCamp</title>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+
+    <!-- Comments here -->
+    <!-- The entire body is wrapped in a container for dynamic sizing -->
+    
+    <div id="shell" class="container-fluid">
+      
+      <div id="nav-bar" class="row">
+        <!-- Inside the nav-bar, there are 4 columns. At large screen resolutions, 3 are visible, and at small resolutions 2 are visible. -->
+        
+        <!-- The left column has 3 rows with text in them. This column disappears when the screen shrinks. -->
+        
+        <div id="left-nav-col" class="col-xs-2">
+          <div class="row button-row">
+            <p class="sales-text">Petroleum Geology</p>
+          </div>
+          <div class="row button-row">
+            <p class="sales-text">Data Analysis</p>
+          </div>
+          <div class="row button-row">
+            <p class="sales-text">Web Development</p>
+          </div>
+        </div>
+        
+        <!-- The middle column (actually the second from left) contains my name.  This section expands when the left column is removed. -->
+        
+        <div id="mid-nav-col" class="col-xs-6">
+          <p id="full-name" class="center-text title">Brian J LeVay</p>
+        </div>
+        
+        <!-- The right column (actually the third from left) contains side-by-side navigation buttons. This column is hidden when the screen shrinks. -->
+        
+        <div id="right-nav-col" class="col-xs-4">
+          <a class="button" href="javascript:scrollSection(3)">Contact</a>
+          <a class="button" href="javascript:scrollSection(2)">Portfolio</a> 
+          <a class="button" href="javascript:scrollSection(1)">About</a>
+        </div>
+        
+        <!-- The "extra" column (actually the fourth from left) contains stacked navigation buttons. This column appears when the screen shrinks and the "right" column disappears. -->
+        
+        <div id="extra-nav-col" class="col-xs-4">
+          
+          <div class="row">
+            <a class="drop-button" href="javascript:scrollSection(1)">About</a>
+          </div>
+          
+          <div class="row">
+            <a class="drop-button" href="javascript:scrollSection(2)">Portfolio</a>
+          </div>
+          
+          <div class="row">
+            <a class="drop-button" href="javascript:scrollSection(3)">Contact</a>
+          </div>
+              
+        </div>
+    
+      </div>
+      
+      <!-- This is the main section that contains all additional content.  This section is set to fill up the part of the screen not occupied by the nav-bar, and the contents inside are set to scroll -->
+      
+      <div id="main-section" class="row">
+        
+        <!-- This row within main is "about me" -->
+      
+        <div id="about-section" class="row">
+          
+          <div id="about-header-row" class="row">
+            <p class="header-text">About Me</p>
+          </div>
+          
+          <div id="about-content-row" class="row center-text">
+            
+            <div id="portrait-section">
+              <img id="portrait" src="https://raw.githubusercontent.com/brianlevay/Files_for_Links/master/Headshot_cropped.JPG">
+            </div>
+            
+            <div id="my-story-section">
+              <p class="fit-text">I'm a Geologist and a Chemist by academic background, and I've been working in the oil industry for a little under 6 years.  I've recently left (voluntarily) to pursue a career change and a location change.</p>
+              <p>I love solving puzzles, and I love working with large, complex datasets to come up with solutions... particularly when there are no easy answers!</p>
+              <p>I also love computers, and I've always had a knack for programming. This webpage was created as part of a project for FreeCodeCamp, but it's a great opportunity to showcase my progress towards my Full Stack Web Development Certification.</p>
+              <p>If you'd like to know more about me, please check out my <a href="https://www.linkedin.com/in/brian-levay-a399aa11b">LinkedIn</a> page, where you can find an up-to-date snapshot of my resume and my experiences.</p>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- This row within main is "portfolio" -->
+        
+        <div id="portfolio-section" class="row">
+          
+          <div id="portfolio-header-row" class="row">
+            <p class="header-text">Portfolio</p>
+          </div>
+          
+          <div id="portfolio-content-row" class="row center-text">
+            
+            <div class="thumbnail">
+              <p class="thumbnail-title">Tribute Page</p>
+              <a href="http://codepen.io/brian_levay/full/vGbYOO/" target="_blank">
+                <img src="https://raw.githubusercontent.com/brianlevay/Files_for_Links/master/Tribute_Thumbnail.png">
+              </a>
+            </div>
+            
+            <div class="thumbnail">
+              <p class="thumbnail-title">Portfolio Page</p>
+              <a href="http://codepen.io/brian_levay/full/BKMzZR" target="_blank">
+                <img src="https://raw.githubusercontent.com/brianlevay/Files_for_Links/master/This_Website_Thumbnail.png">
+              </a>
+            </div>
+            
+            <div class="thumbnail">
+              <p class="thumbnail-title">Coming Soon</p>
+              <img src="https://raw.githubusercontent.com/brianlevay/Files_for_Links/master/Coming_Soon_Thumbnail.png">
+            </div>
+            
+            <div class="thumbnail">
+              <p class="thumbnail-title">Coming Soon</p>
+              <img src="https://raw.githubusercontent.com/brianlevay/Files_for_Links/master/Coming_Soon_Thumbnail.png">
+            </div>
+            
+            <div class="thumbnail">
+              <p class="thumbnail-title">Coming Soon</p>
+              <img src="https://raw.githubusercontent.com/brianlevay/Files_for_Links/master/Coming_Soon_Thumbnail.png">
+            </div>
+            
+            <div class="thumbnail">
+              <p class="thumbnail-title">Coming Soon</p>
+              <img src="https://raw.githubusercontent.com/brianlevay/Files_for_Links/master/Coming_Soon_Thumbnail.png">
+            </div>
+            
+          </div>
+          
+          <div id="portfolio-caption-row" class="row">
+            <p class="labels">The projects shown in the thumbnails above were all created as part of the curriculum for the Full Stack Web Development program at FreeCodeCamp. Additional projects will replace the "Coming Soon" images when they are complete.  Please click on the thumbnails, and they will take you to CodePen versions of the projects.</p>
+          </div>
+            
+        </div>
+        
+        <!-- This row within main is "contact" -->
+        
+        <div id="contact-section" class="row">
+          
+          <div id="contact-header-row" class="row">
+            <p class="header-text">Contact Me</p>
+          </div>
+          
+          <div id="contact-links-sect" class="row">
+            <p class="labels">Feel free to check out the links to my LinkedIn, GitHub, and CodePen profiles below.  Please note that form is currently not active.  Contact me through my LinkedIn profile.</p><p></p>
+            
+            <p class="center-text">
+              
+            <a id="linkedin-button" class="btn btn-social-icon btn-linkedin" href="https://www.linkedin.com/in/brian-levay-a399aa11b" target="_blank">
+            <span class="fa fa-linkedin icon-text-white"></span>
+            </a>
+              
+            <a id="github-button" class="btn btn-social-icon btn-github" href="https://github.com/brianlevay" target="_blank">
+            <span class="fa fa-github icon-text-black"></span>
+            </a>
+              
+            <a id="codepen-button" class="btn btn-social-icon btn-codepen" href="http://codepen.io/brian_levay/" target="_blank">
+            <span class="fa fa-codepen icon-text-white"></span>
+            </a>
+              
+            </p>
+          </div>
+          
+          <div id="contact-form-sect" class="row">
+    
+            <div id="name-form" class="form-field">
+              <form id="contact">
+                <p class="labels">Name</p>
+                <input id="yourname" class="input-simple" type="text" value="Enter Name">
+              </form>
+            </div>
+            
+            <div id="email-form" class="form-field">
+              <p class="labels">Email</p>
+              <input id="emailadd" class="input-simple" type="text" value="Your Email Address" form="contact">
+            </div>
+              
+            <div id="message-form" class="form-field">
+              <p class="labels">Message</p>
+              <textarea id="message" class="input-message" type="text" value="Type your message here." form="contact">Type your message here</textarea>
+            </div>
+            
+            <div id="submit-button" class="form-field">
+              <p class="labels">Send</p>
+              <input type="submit"  value="Submit" form="contact">
+            </div>
+    
+          </div>
+          
+        </div>
+      
+        <!-- This row within main is "footer" -->
+        
+        <div id="footer-section" class="row">
+          <p id="footer-text">Designed and coded by Brian LeVay - last update May 9, 2016</p>
+        </div>
+        
+      </div>
+    </div>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script src="js/index.js"></script>
+
+  </body>
+</html>

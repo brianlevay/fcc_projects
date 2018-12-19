@@ -1,0 +1,163 @@
+body {
+  background-color: #535640;
+}
+
+a {
+  color: white;
+}
+
+#title-sect {
+}
+
+#title-txt {
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 5px 0px 5px 0px;
+  width: 40%;
+  min-width: 350px;
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: bold;
+  background-color: #bcab90;
+  color: black;
+  text-shadow: 1px 1px 0px white;
+  border-style: outset;
+  border-color: #bcab90;
+  box-shadow: 4px 4px 4px black;
+}
+
+/* The box styling was taken from http://stackoverflow.com/questions/5445491/height-equal-to-dynamic-width-css-fluid-layout */
+.box {
+  position: relative;
+  width: 40%;
+  margin: auto;
+  min-width: 350px;
+}
+
+.box:before {
+  content: "";
+  display: block;
+  padding-top: 100%; /* initial ratio of 1:1*/
+}
+
+#board {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 1% 0% 0% 0%;
+  background-color: white;
+  text-align: center;
+  border-style: outset;
+  border-color: gray;
+  box-shadow: 4px 4px 4px black;
+}
+
+.cell {
+  display: inline-block;
+  width: 30%;
+  height: 30%;
+  margin: 1%;
+  background-color: #9495a5;
+  outline: 2px inset black;
+  position: relative;
+}
+
+#footer-txt {
+  margin: auto;
+  margin-bottom: 5px;
+  margin-top: 15px;
+  padding: 5px 0px 5px 0px;
+  width: 40%;
+  min-width: 300px;
+  text-align: center;
+  font-size: 0.9em;
+  color: white;
+  background-color: #745d46;
+  border-style: outset;
+  border-color: #745d46;
+  box-shadow: 4px 4px 4px black;
+}
+
+.entry {
+  position: absolute;
+  margin: 15% 0% 0% 30%;
+  font-size: 8vw;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+/* hidden DOMs */
+
+#new-game {
+  position: absolute;
+  width: 200px;
+  background-color: white;
+  top: 5%;
+  left: -5%;
+  padding: 2%;
+  visibility: visible;
+  box-shadow: 0px 0px 20px black;
+}
+
+#new-title {
+  margin: 0px 0px 15px 0px;
+  padding: 5px;
+  font-size: 2em;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-weight: bold;
+  background-color: #ac7e54;
+  box-shadow: 2px 2px 2px black;
+  text-align: center;
+}
+
+label {
+  font-family: "Lucida Console", Monaco, monospace;
+  color: #4a5444;
+}
+
+#start-btn {
+  width: 100px;
+  height: 35px;
+  font-weight: bold;
+  font-size: 1.2em;
+  outline-style: outset;
+  outline-color: #4a5444;
+  background-color: #4a5444;
+  color: white;
+  text-shadow: 1px 1px 0px black;
+}
+
+/* Hidden: Game outcome */
+
+#outcome {
+  position: absolute;
+  width: 110%;
+  background-color: white;
+  top: 5%;
+  left: -5%;
+  padding: 0%;
+  visibility: hidden;
+  box-shadow: 0px 0px 20px black;
+}
+
+#outcome-txt {
+  margin: 0px;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-weight: bold;
+  font-size: 3em;
+  text-shadow: 1px 1px 0px white;
+  padding: 10px;
+  background-color: #ac7e54;
+  box-shadow: 2px 2px 2px black;
+  text-align: center;
+}
+
+/* Dynamic CSS */
+
+@media(max-width:900px) {
+  .entry {
+    font-size: 4.5em;
+  }
+}

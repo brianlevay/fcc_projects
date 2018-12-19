@@ -1,0 +1,105 @@
+/* size variables */
+/* padding and margin variables */
+/* font variables */
+/* Background colors */
+/* classes for extension */
+.mainSection, body #pageSect #headerSect, body #pageSect #containerSect, body #pageSect #guideSect, body #pageSect #footerSect {
+  display: block;
+  margin: 10px;
+  padding: 1%;
+  border: 1px solid black;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.markedSection, body #pageSect #containerSect .shell .inputSect, body #pageSect #containerSect .shell .outputSect {
+  display: table-cell;
+  width: 50%;
+  padding: 10px;
+  border: 1px solid black;
+  vertical-align: top;
+}
+
+.titles, body #pageSect #containerSect .shell .inputSect .titleText, body #pageSect #containerSect .shell .outputSect .titleText, body #pageSect #guideSect span {
+  display: block;
+  margin: 0px 0px 10px 0px;
+  padding: 5px;
+  font-weight: bold;
+  border: 1px solid black;
+  box-shadow: 2px 2px 2px gray;
+  background-color: #fff056;
+}
+
+.guideItem, body #pageSect #guideSect div {
+  display: inline-block;
+  height: 30px;
+  margin: 2px;
+  padding: 5px;
+  border: 1px solid gray;
+  vertical-align: top;
+  font-size: 0.8em;
+  background-color: white;
+}
+
+a {
+  color: black;
+}
+
+/* specific sections for styling */
+body {
+  background-color: #191919;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body #pageSect {
+  width: 75%;
+  margin: auto;
+  padding: 5px;
+  background-color: white;
+}
+body #pageSect #headerSect {
+  background-color: #67bcdb;
+  font-size: 2.5em;
+  font-weight: bold;
+  text-align: center;
+}
+body #pageSect #containerSect {
+  background-color: #a2ab58;
+}
+body #pageSect #containerSect .shell {
+  display: table;
+  width: 100%;
+  border-spacing: 5px;
+}
+body #pageSect #containerSect .shell .inputSect {
+  background-color: white;
+}
+body #pageSect #containerSect .shell .inputSect .textInput {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 98%;
+  height: 500px;
+  margin: 5px 0px 0px 0px;
+  padding: 15px 0px 15px 15px;
+  resize: vertical;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+body #pageSect #containerSect .shell .outputSect {
+  background-color: white;
+}
+body #pageSect #containerSect .shell .outputSect div {
+  height: 500px;
+  margin: 15px 8px 0px 0px;
+  padding: 0px 15px;
+  overflow: auto;
+  border: 1px solid black;
+}
+body #pageSect #guideSect {
+  background-color: #dfe2db;
+}
+body #pageSect #footerSect {
+  background-color: #67bcdb;
+  font-size: 0.8em;
+  text-align: center;
+}

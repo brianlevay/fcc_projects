@@ -1,0 +1,102 @@
+/* Comments below */
+/* Bootstrap is enabled in the CSS panel */
+/* These top CSS rules are static class, id, and element modifiers. Simple. */
+
+.main-body {
+  margin: 10px;
+  padding: 5px;
+  background-color: #e0e6eb;
+}
+
+.title-section {
+  margin: 0px;
+  padding: 2px;
+  background-color: #668099;
+}
+
+#title-name {
+  color: black;
+  text-shadow: 4px 4px 0px rgba(0,0,0,0.1); 
+}
+
+#subtitle-name {
+  color: black;
+}
+
+.image-section {
+  margin: 0px;
+  padding: 2px;
+  background-color: #c2ccd6;
+}
+
+.text-section {
+  margin: 0px;
+  padding: 2px;
+  background-color: #e0e6eb;
+}
+
+.footer {
+  margin: 10px;
+  padding: 2px;
+  background-color: white;
+}
+
+.centered-text {
+  margin: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+.left-text {
+  margin: 10px;
+  padding: 5px;
+  text-align: left;
+}
+
+.subheadings {
+  font-weight: bold;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+/* This section is a bit different. These rules scale text sizes in the title and subtitle based on screen width */
+
+@media(max-width:800px) {
+  #title-name {
+    font-size: 25px;
+  }
+  #subtitle-name {
+    font-size: 15px;
+  }
+}
+
+@media(min-width:900px) {
+  #title-name {
+    font-size: 35px;
+  }
+  #subtitle-name {
+    font-size: 20px;
+  }
+}
+
+@media(min-width:1000px) {
+  #title-name {
+    font-size: 45px;
+  }
+  #subtitle-name {
+    font-size: 30px;
+  }
+}
+
+@media(min-width:1200px) {
+  #title-name {
+    font-size: 60px;
+  }
+  #subtitle-name {
+    font-size: 40px;
+  }
+}
+

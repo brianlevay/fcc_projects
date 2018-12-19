@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Build a Tribute Page - FreeCodeCamp</title>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+
+  <body>
+
+    <!-- Comments below -->
+    <!-- The entire body is wrapped in a fluid container to allow dynamic resizing -->
+    
+    <div class="container-fluid">
+      
+      <!-- Inside the shell, there are two main div sections - the "main-body", where all fo the contents are hosted, and the "footer" -->
+      
+      <div class="main-body">
+        
+        <!-- Inside the "main-body" div, there are three rows: one with the title and flags, one containing the main image, and the one containing the main body of text. -->
+        <!-- The first row contains three columns, with a flag on each end and a title in the middle.  The left and right columns are removed using JS when the screen size is small, and the text section is expanded to the full width.  -->
+        
+        <div id="title-row" class="row title-section">
+          
+          <!-- The first column in the row has a flag -->
+          
+          <div id="left-title-col" class="col-xs-2">
+            
+            <!-- Each image is wrapped inside a paragraph element as a convenient way to center it in the div -->
+            
+            <p id="left-flag" class="centered-text">
+              <img src="https://raw.githubusercontent.com/brianlevay/Files_for_Links/master/13star-sml.gif">
+            </p>
+          </div>
+          
+          <!-- The second column has the title and subtitle -->
+          
+          <div id="title-block" class="col-xs-8">
+            <h1 id="title-name" class="centered-text">Marquis de Lafayette</h1>
+            <h4 id="subtitle-name" class="centered-text"><em>The French hero that helped the United States to win its independence</em></h4>
+          </div>
+          
+          <!-- The third column has another flag -->
+          
+          <div id="right-title-col" class="col-xs-2">
+            <p id="right-flag" class="centered-text">
+              <img src="https://raw.githubusercontent.com/brianlevay/Files_for_Links/master/french_flag_200px.png">
+            </p>
+          </div>
+        </div>
+        
+        <!-- This row only contains the main image -->
+        
+        <div class="row image-section">
+          <p class="centered-text">
+            <img id="portrait"  src="https://raw.githubusercontent.com/brianlevay/Files_for_Links/master/Gilbert_du_Motier_Marquis_de_Lafayette.PNG">
+          </p>
+          <p class="centered-text">
+            Lafayette as a lieutenant general, in 1791. Portrait by Joseph-Désiré Court.  Image courtesy of <a href="https://en.wikipedia.org/wiki/Gilbert_du_Motier,_Marquis_de_Lafayette">Wikipedia</a>
+          </p>
+        </div>
+        
+        <!-- This row contains the main section for text.  It's broken into three columns, for layout. The left and right columns are removed using JS when the screen size is small, and the text section is expanded to the full width. -->
+        
+        <div class="row text-section">
+          
+          <!-- The left column is empty and is just used for spacing -->
+          
+          <div id="left-text-col" class="col-xs-1"></div>
+          
+          <!-- The center column contains the text contents and lists -->
+          
+          <div id="main-text-block" class="col-xs-10">
+            <h4 class="subheadings left-text">Summary</h4>
+            <p class="left-text">
+              The Marquis de Lafayette  (full name of Marie-Joseph Paul Yves Roch Gilbert du Motier) was a French aristocrat, diplomat, and accomplished military commander who played an instrumental role in helping to secure French support for the American cause in the Revolutionary War.  In addition, he took to the battlefield and commanded American troops in some of the most important battles of the war.  After the American victory, he returned home to France and continued to play an outsized role in history.  He was a major figure during the course of the French Revolution.
+            </p>
+            <h4 class="subheadings left-text">Life Before the War</h4>
+            <p class="left-text">
+              <ul>
+                <li>1757 : Lafayette was born</li>
+                <li>1768 : Sent to Paris to live with his mother</li>
+                <li>1771 : Joined the musketeers</li>
+                <li>1773 : Got married; appointed as a leiutenent in the Dragoons</li>
+                <li>1775 : First became interesting in the growing tensions in North America; appointed as a Captain in the Dragoons</li>
+                <li>1776 : Volunteered to go to America with a French military contingency in order to help with the war.  However, due to diplomatic tensions, the trip was postponed.  Promoted to Major General.</li>
+              </ul>
+            </p>
+            <h4 class="subheadings left-text">American Revolution</h4>
+            <p class="left-text">
+              <ul>
+                <li>1777 : Lafayette left France without official permission and arrived in the United States on a ship he procured with his own funds.  He met the Continental Congress, and offered to serve in the military without pay.  He was appointed Major General, and quickly became close friends with George Washington.  In September, he took part in the Battle of Brandywine, and while rallying American forces during a retreat, he was shot in the leg.  He recuperated and returned to the battlefield later that year.</li>
+                <li>1778 : France formally recognized the USA.  Lafayette continued to lead troops into battle, and he acted as a liason to the newly arrived French naval forces.</li>
+                <li>1779 : Lafayatte returned home and was placed under house arrest for 8 days as punishment for disobeying the King.  However, this was merely for show, and afterwards, he was given a hero's welcome.  While back at home, he pushed to bring the fight to Britain by ways of a combined Spanish and French invasion, but the idea fell apart due to lackluster Spanish support.</li>
+                <li>1780 : Lafayette returned to America, at a low point in the war.  France didn't send the full compliment of troops that Lafayette had been expecting, and Lafayette's troops did not see much battle that year.</li>
+                <li>1781 : Lafayette and his men spent most of the year playing a strategic game against the British General Cornwallis.  His troops frequently attacked and harassed Cornwallis's men, and finally, with the arrival of Washington's troops, Lafayette helped lay seige to Yorktown and convince Cornwallis to surrender.  That would be the last major battle of the war, and Lafayette returned to France by the end of the year.</li>
+              </ul>
+              </p>
+              <h4 class="subheadings left-text">Return to France</h4>
+              <p class="left-text">
+                <ul>
+                  <li>1782-1785 : Lafayette spent the next few years working with both the new US government and France to formalize relationships and agreements.  He also took an active interest in American politics.</li>
+                  <li>1786-1799 : French Revolution and its aftermath.  Lafayette was initially one of the major figures in the Revolution, but he later stood against the radicals that had begun to take over the government.  He spent 5 years in prison.</li>
+                  <li>1800-1833 : French politics continued, but Lafayette increasingly retreated from the limelight.  He took a grand tour of the USA and was met with fanfare wherever he went.</li>
+                  <li>1834 : Lafayette dies</li>
+                </ul>
+              </p>
+              <p class="left-text">
+                The information on this page was mostly taken from the following web sites. I don't claim to be a historian, and I may have left out or misrepresented important events. I encourage all readers and students of history to read through the content in the links below.
+              </p>
+              <p class="left-text">
+                <a href="https://en.wikipedia.org/wiki/Gilbert_du_Motier,_Marquis_de_Lafayette">Wikipedia</a>
+                &nbsp&nbsp&nbsp&nbsp
+                <a href="http://www.biography.com/people/marquis-de-lafayette-21271783#post-american-revolution">Biography</a>
+                &nbsp&nbsp&nbsp&nbsp
+                <a href="http://www.ushistory.org/Valleyforge/served/lafayette.html">US History</a>
+              </p>
+          </div>
+    
+          <!-- The right column is again empty and just used for spacing -->
+    
+          <div id="right-text-col" class="col-xs-1"></div>
+        </div>
+        
+      </div>
+    
+      <!-- The footer section is simple -->
+      
+      <div class="footer">
+        <p class="centered-text">Written and coded by: Brian LeVay, May 2016</p>
+      </div>
+      
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script src="js/index.js"></script>
+
+  </body>
+</html>

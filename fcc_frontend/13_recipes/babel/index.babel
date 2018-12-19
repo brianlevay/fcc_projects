@@ -1,0 +1,309 @@
+//// This function tests whether localStorage is available ////
+
+function localAvailable() {
+  try {
+    var test = '__storageTest__';
+    localStorage.setItem(test,test);
+    localStorage.removeItem(test);
+    return true;
+  }
+  catch(error) {
+    return false;
+  }
+}
+
+//// This gets the initial set of recipes, either from localStorage or a pre-set list ////
+
+var start = [
+  {id: 1, name: "Stroganoff", ingredients: "ground beef, onions, Cream of Mushroom soup, mushrooms, sour cream, Worcestershire sauce", directions: "Cook onions, then ground beef, then add everything else and heat through", vis: false},
+  {id: 2, name: "Tuna Salad", ingredients: "tuna, Miracle Whip, mustard, hardboiled eggs, green onions", directions: "mix together, put on bread", vis: false},
+  {id: 3, name: "BBQ Chicken", ingredients: "chicken, BBQ sauce, sides", directions: "cook chicken, add sauce", vis: false}
+];
+var numStart = 3;
+var startJSON = JSON.stringify(start);
+
+var initialize = [];
+var numInitial = 0;
+if (localAvailable() && localStorage.getItem('_brianlevay_recipes')) {
+  initialize = JSON.parse(localStorage.getItem('_brianlevay_recipes'));
+  for (var i = 0; i < initialize.length; i++) {
+    if (initialize[i].id > numInitial) {numInitial = initialize[i].id;}
+    if (initialize[i].vis === true) {initialize[i].vis = false;}
+  }
+} else {
+  initialize = start;
+  numInitial = numStart;
+}
+
+//// This is the root React class, the RecipeBox ////
+
+var RecipeBox = React.createClass({
+  getInitialState: function() {
+    return {
+      recipes: initialize, 
+      counter: numInitial, 
+      recipeID: 0, formName: "", formIngredients: "", formDirections: "", 
+      formVis: false, formForUpdate: false
+    };
+  },
+  updateName: function(e) {
+    this.setState({formName: e.target.value})
+  },
+  updateIngredients: function(e) {
+    this.setState({formIngredients: e.target.value})
+  },
+  updateDirections: function(e) {
+    this.setState({formDirections: e.target.value})
+  },
+  setForAdd: function() {
+    this.setState({formVis: true, formForUpdate: false});
+  },
+  addRecipe: function() {
+    if (this.state.formName && this.state.formIngredients) {
+      var newNumAdd = this.state.counter + 1;
+      var newRecipesAdd = this.state.recipes.concat([{id: newNumAdd, name: this.state.formName, ingredients: this.state.formIngredients, directions: this.state.formDirections}]);
+      this.setState({recipes: newRecipesAdd});
+      this.setState({counter: newNumAdd});
+      this.setState({recipeID: 0, formName: "", formIngredients: "", formDirections: "", formVis: false, formForUpdate: false});
+      if (localAvailable()) {
+        localStorage.setItem('_brianlevay_recipes', JSON.stringify(newRecipesAdd));
+      }
+    }
+  },
+  setForUpdate: function(id, name, ingredients, directions) {
+    this.setState({recipeID: id, formName: name, formIngredients: ingredients, formDirections: directions});
+    this.setState({formVis: true, formForUpdate: true});
+  },
+  updateRecipe: function() {
+    var newRecipesUpdate = this.state.recipes.slice(0);
+    for (var i = 0; i < newRecipesUpdate.length; i++) {
+      if (newRecipesUpdate[i].id == this.state.recipeID) {
+        newRecipesUpdate[i].name = this.state.formName;
+        newRecipesUpdate[i].ingredients = this.state.formIngredients;
+        newRecipesUpdate[i].directions = this.state.formDirections;
+      }
+    }
+    this.setState({recipes: newRecipesUpdate});
+    this.setState({recipeID: 0, formName: "", formIngredients: "", formDirections: "", formVis: false, formForUpdate: false});
+    if (localAvailable()) {
+      localStorage.setItem('_brianlevay_recipes', JSON.stringify(newRecipesUpdate));
+    }
+  },
+  deleteRecipe: function(id) {
+    var newRecipesDelete = this.state.recipes.filter(function(r){
+      return r.id !== id;
+    });
+    this.setState({recipes: newRecipesDelete});
+    if (localAvailable()) {
+      localStorage.setItem('_brianlevay_recipes', JSON.stringify(newRecipesDelete));
+    }
+  },
+  toggleVis: function(id) {
+    var newRecipesVis = this.state.recipes.slice(0);
+    for (var i = 0; i < newRecipesVis.length; i++) {
+      if (newRecipesVis[i].id == id) {
+        if (newRecipesVis[i].vis === true) {
+          newRecipesVis[i].vis = false;
+        } else {
+          newRecipesVis[i].vis = true;
+        }
+      }
+    }
+    this.setState({recipes: newRecipesVis});
+  },
+  cancelForm: function(){
+    this.setState({recipeID: 0, formName: "", formIngredients: "", formDirections: "", formVis: false, formForUpdate: false});
+  },
+  resetToInitial: function(){
+    var newRecipesReset = JSON.parse(startJSON);
+    var newNumReset = numStart;
+    this.setState({recipes: newRecipesReset});
+    this.setState({counter: newNumReset});
+    this.setState({recipeID: 0, formName: "", formIngredients: "", formDirections: "", formVis: false, formForUpdate: false});
+    if (localAvailable()) {
+      localStorage.setItem('_brianlevay_recipes', JSON.stringify(newRecipesReset));
+    }
+  },
+  render: function(){
+    return (
+      <div className="recipeBox">
+        <RecipeList 
+          recipes={this.state.recipes} 
+          toggleVis={this.toggleVis} 
+          setForUpdate={this.setForUpdate}
+          deleteRecipe={this.deleteRecipe} 
+        />
+        <div className="addNew">
+          <button
+            className="addBtn" 
+            onClick={this.setForAdd} 
+          >Add New Recipe</button>
+          <button
+            className="resetBtn" 
+            onClick={this.resetToInitial} 
+          >Reset to Default</button>
+        </div>
+        <RecipeForm 
+          recipeID={this.state.recipeID} 
+          formName={this.state.formName} 
+          formIngredients={this.state.formIngredients} 
+          formDirections={this.state.formDirections} 
+          formVis={this.state.formVis}
+          formForUpdate={this.state.formForUpdate}
+          updateName={this.updateName} 
+          updateIngredients={this.updateIngredients} 
+          updateDirections={this.updateDirections} 
+          addRecipe={this.addRecipe}
+          updateRecipe={this.updateRecipe}
+          cancelForm={this.cancelForm}
+        />
+      </div>
+    );
+  }
+});
+
+//// This is the React class that creates the array of individual Recipes ////
+
+var RecipeList = React.createClass({
+  render: function(){
+    var toggleVisFn = this.props.toggleVis;
+    var setForUpdateFn = this.props.setForUpdate;
+    var deleteRecipeFn = this.props.deleteRecipe;
+    var recipeSet = this.props.recipes;
+    var recipes = recipeSet.map(function(recipe) {
+      return (
+        <Recipe 
+          id={recipe.id} 
+          name={recipe.name} 
+          ingredients={recipe.ingredients} 
+          directions={recipe.directions} 
+          vis={recipe.vis}
+          toggleVis={toggleVisFn} 
+          setForUpdate={setForUpdateFn}
+          deleteRecipe={deleteRecipeFn} 
+        />
+      );
+    });
+    return (
+      <div className="recipeList">
+        {recipes}
+      </div>
+    );
+  }
+});
+
+//// This is the React class for the Recipe Form, used to add and edit ////
+
+var RecipeForm = React.createClass({
+  render: function(){
+    if (this.props.formVis === true) {
+      var formClass = "recipeForm";
+    } else {
+      var formClass = "recipeForm notShown";
+    }
+    if (this.props.formForUpdate === true) {
+      var addSpanClass = "formTitle notShown";
+      var updateSpanClass = "formTitle";
+      var addBtnClass = "formBtn notShown";
+      var updateBtnClass = "formBtn";
+    } else {
+      var addSpanClass = "formTitle";
+      var updateSpanClass = "formTitle notShown";
+      var addBtnClass = "formBtn";
+      var updateBtnClass = "formBtn notShown";
+    }
+    
+    return (
+      <div className={formClass}>
+        <span className={addSpanClass}>Add Recipe</span>
+        <span className={updateSpanClass}>Edit Recipe</span>
+        <br/>(Use commas to separate ingredients)<br/><br/>
+        <div className="recipeSubTitle">Name: </div>
+        <textarea 
+          className="nameTextArea" 
+          value={this.props.formName}
+          onChange={this.props.updateName}
+        ></textarea>
+        <div className="recipeSubTitle">Ingredients: </div>
+        <textarea 
+          className="contentTextArea" 
+          value={this.props.formIngredients}
+          onChange={this.props.updateIngredients}
+        ></textarea>
+        <div className="recipeSubTitle">Directions: </div>
+        <textarea 
+          className="contentTextArea" 
+          value={this.props.formDirections}
+          onChange={this.props.updateDirections}
+        ></textarea>
+        <button 
+          className={addBtnClass} 
+          onClick={this.props.addRecipe}
+        >Add</button>
+        <button 
+          className={updateBtnClass} 
+          onClick={this.props.updateRecipe}
+        >Update</button>
+        <button 
+          className="formBtn" 
+          onClick={this.props.cancelForm}
+        >Cancel</button>
+      </div>
+    );
+  }
+});
+
+//// This is the React class for the individual Recipes ////
+
+var Recipe = React.createClass({
+  render: function(){
+    var ingredientArr = this.props.ingredients.split(",");
+    var ingredientList = ingredientArr.map(function(ingredient) {
+      return (
+        <div className="ingredient">{ingredient}</div>
+      );
+    });
+    if (this.props.vis === true) {
+      var recipeContentClass = "recipeContents";
+    } else {
+      var recipeContentClass = "recipeContents notShown";
+    }
+    
+    return (
+      <div className="recipe">
+        <div className="recipeName"
+          onClick={()=>this.props.toggleVis(this.props.id)} 
+        >
+          {this.props.name}
+        </div>
+        <div className={recipeContentClass}>
+          <div className="ingredientList">
+            <div className="recipeSubTitle">Ingredients: </div>
+            {ingredientList}
+          </div>
+          <div className="directions">
+            <div className="recipeSubTitle">Directions: </div>
+            {this.props.directions}
+          </div>
+          <div>
+            <button 
+              className="editBtn" 
+              onClick={()=>this.props.setForUpdate(this.props.id, this.props.name, this.props.ingredients, this.props.directions)}
+            >Edit</button>
+            <button 
+              className="deleteBtn" 
+              onClick={()=>this.props.deleteRecipe(this.props.id)}
+            >Delete</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+});
+
+// This renders the virtual DOM contents //
+
+ReactDOM.render(
+  <RecipeBox />,
+  document.getElementById('contentSect')
+);

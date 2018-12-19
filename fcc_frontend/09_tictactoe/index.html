@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>TicTacToe - FreeCodeCamp</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+
+    <div id="page" class="container-fluid">
+      <div id="title-sect">
+        <p id="title-txt">Tic Tac Toe</p>
+      </div>
+      <div class="box">
+        <div id="board">
+          <div id="tl" class="cell">
+            <p class="entry"></p>
+          </div>
+          <div id="tm" class="cell">
+            <p class="entry"></p>
+          </div>
+          <div id="tr" class="cell">
+            <p class="entry"></p>
+          </div>
+          <div id="ml" class="cell">
+            <p class="entry"></p>
+          </div>
+          <div id="mm" class="cell">
+            <p class="entry"></p>
+          </div>
+          <div id="mr" class="cell">
+            <p class="entry"></p>
+          </div>
+          <div id="bl" class="cell">
+            <p class="entry"></p>
+          </div>
+          <div id="bm" class="cell">
+            <p class="entry"></p>
+          </div>
+          <div id="br" class="cell">
+            <p class="entry"></p>
+          </div>
+        </div>
+        <div id="new-game">
+          <p id="new-title">New Game</p>
+          <form id="difficulty-form">
+            <input type="radio" name="difficulty" value="easy" checked="checked"><label> Easy</label><br>
+            <input type="radio" name="difficulty" value="medium"><label> Medium</label><br>
+            <input type="radio" name="difficulty" value="hard"><label> Hard</label>
+          </form>
+          <br>
+          <form id="symbol-form">
+            <input type="radio" name="symbol" value="X" checked="checked"><label> X (Goes first)</label><br>
+            <input type="radio" name="symbol" value="O"><label> O (Goes second)</label>
+          </form>
+          <br>
+          <button id="start-btn" type="button">Start</button>
+        </div>
+        <div id="outcome">
+          <h1 id="outcome-txt">You Lose!</h1>
+        </div>
+      </div>
+      <div id="footer-sect">
+        <p id="footer-txt">Created by Brian LeVay, May 2016<br>Built as part of the <a href="http://www.freecodecamp.com">Free Code Camp</a> curriculum</p>
+      </div>
+    </div>
+
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script src="js/index.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,170 @@
+/* size variables */
+
+$pageWidth: 75%;
+$textAreaHeight: 500px;
+
+/* padding and margin variables */
+
+$pagePadding: 5px;
+$cellSpacing: 5px;
+$textAreaMargin: 5px 0px 0px 0px;
+$textAreaPadding: 15px 0px 15px 15px;
+$outAreaMargin: 15px 8px 0px 0px;
+$outAreaPadding: 0px 15px;
+
+/* font variables */
+
+$fontFamily: Arial, Helvetica, sans-serif;
+$defaultFontSize: 1em;
+$headerFontSize: 2.5em;
+$headerFontWeight: bold;
+$footerFontSize: 0.8em;
+
+/* Background colors */
+
+$bodyBackColor: #191919;
+  $pageBackColor: white;
+    $headerBackColor: #67bcdb;
+    $contBackColor: #a2ab58;
+      $inputBackColor: white;
+      $outputBackColor: white;
+      $titleBackColor: #fff056;
+    $guideBackColor: #dfe2db;
+      $guideItemBackColor: white;
+    $footerBackColor: #67bcdb;
+
+/* classes for extension */
+  
+.mainSection {
+  display: block;
+  margin: 10px;
+  padding: 1%;
+  border: 1px solid black;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.markedSection {
+  display: table-cell;
+  width: 50%;
+  padding: 10px;
+  border: 1px solid black;
+  vertical-align: top;
+}
+
+.titles {
+  display: block;
+  margin: 0px 0px 10px 0px;
+  padding: 5px;
+  font-weight: bold;
+  border: 1px solid black;
+  box-shadow: 2px 2px 2px gray;
+  background-color: $titleBackColor;
+}
+
+.guideItem {
+  display: inline-block;
+  height: 30px;
+  margin: 2px;
+  padding: 5px;
+  border: 1px solid gray;
+  vertical-align: top;
+  font-size: 0.8em;
+  background-color: $guideItemBackColor
+}
+
+a {
+  color: black;
+}
+
+/* specific sections for styling */
+
+body {
+  background-color: $bodyBackColor;
+  font-family: $fontFamily;
+  
+  #pageSect {
+    width: $pageWidth;
+    margin: auto;
+    padding: $pagePadding;
+    background-color: $pageBackColor;
+  
+    #headerSect {
+      @extend .mainSection;
+      background-color: $headerBackColor;
+      font-size: $headerFontSize;
+      font-weight: $headerFontWeight;
+      text-align: center;
+    }
+
+    #containerSect {
+      @extend .mainSection;
+      background-color: $contBackColor;
+  
+      .shell {
+        display: table;
+        width: 100%;
+        border-spacing: $cellSpacing;
+        
+        .inputSect {
+          @extend .markedSection;
+          background-color: $inputBackColor;
+        
+          .titleText {
+            @extend .titles;
+          }
+          
+          .textInput {
+            font-family: $fontFamily;
+            width: 98%;
+            height: $textAreaHeight;
+            margin: $textAreaMargin;
+            padding: $textAreaPadding;
+            resize: vertical;
+            -webkit-box-sizing: border-box;
+               -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+            font-size: $defaultFontSize;
+          }
+        }
+
+        .outputSect {
+          @extend .markedSection;
+          background-color: $outputBackColor;
+          
+          .titleText {
+            @extend .titles;
+          }
+          
+          div {
+            height: $textAreaHeight;
+            margin: $outAreaMargin;
+            padding: $outAreaPadding;
+            overflow: auto;
+            border: 1px solid black;
+          }
+        }  
+      }
+    }
+
+    #guideSect {
+      @extend .mainSection;
+      background-color: $guideBackColor;
+      
+      span {
+        @extend .titles;
+      }
+      
+      div {
+        @extend .guideItem;
+      }
+    }
+    
+    #footerSect {
+      @extend .mainSection;
+      background-color: $footerBackColor;
+      font-size: $footerFontSize;
+      text-align: center;
+    }
+  }
+}

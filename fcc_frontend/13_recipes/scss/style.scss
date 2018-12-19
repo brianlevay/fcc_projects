@@ -1,0 +1,217 @@
+//// Variables ////
+
+$fontFamily: 'Gochi Hand', sans-serif;
+$bodyBackgroundColor: #e9e7da;
+
+$recipeBoxBorderColor: #636b46;
+$recipeBoxBackgroundColor: #636b46;
+
+$addBtnBackgroundColor: #e9e7da;
+$addBtnFontColor: black;
+$resetBtnBackgroundColor: #76323f;
+$resetBtnFontColor: white;
+$editBtnBackgroundColor: #373f27;
+$editBtnFontColor: white;
+$deleteBtnBackgroundColor: #76323f;
+$deleteBtnFontColor: white;
+$formBtnBackgroundColor: #373f27;
+$formBtnFontColor: white;
+
+$recipeBackgroundColor: white;
+$recipeNameBackgroundColor: #cda34f;
+$formBackgroundColor: white;
+
+//// 1st and 2nd level styles ////
+
+body {
+  font-family: $fontFamily;
+  background-color: $bodyBackgroundColor;
+}
+
+#pageSect {
+  margin: auto;
+  width: 70%;
+}
+
+//// 3rd level styles, main sections ////
+
+#headerSect {
+  margin: 10px;
+  text-align: center;
+  font-size: 4em;
+  font-weight: bold;
+}
+
+#contentSect {
+  
+}
+
+#footerSect {
+  margin: 10px;
+  text-align: center;
+  font-size: 1em;
+  
+  a {
+    color: black;
+  }
+}
+
+//// Main React container styles ////
+
+.recipeBox {
+  position: relative;
+  padding: 10px;
+  background-color: $recipeBoxBackgroundColor;
+  border: 10px inset $recipeBoxBorderColor;
+  border-radius: 5px;
+  box-shadow: 1px 1px 0px $recipeBoxBorderColor,
+    2px 2px 0px $recipeBoxBorderColor, 
+    3px 3px 0px $recipeBoxBorderColor, 
+    4px 4px 0px $recipeBoxBorderColor, 
+    5px 5px 0px $recipeBoxBorderColor;
+}
+
+//// 1st level styles within the React container ////
+
+.recipeList {
+  
+}
+
+.addNew {
+  margin: 15px 0px 0px 0px;
+}
+
+.generalBtn {
+  font-family: $fontFamily;
+  font-size: 1.2em;
+  border-style: outset;
+  border-width: 5px;
+}
+
+.addBtn {
+  @extend .generalBtn;
+  background-color: $addBtnBackgroundColor;
+  color: $addBtnFontColor;
+  border-color: $addBtnBackgroundColor;
+}
+
+.resetBtn {
+  @extend .generalBtn;
+  margin: 0px 0px 0px 10px;
+  background-color: $resetBtnBackgroundColor;
+  color: $resetBtnFontColor;
+  border-color: $resetBtnBackgroundColor;
+}
+
+.recipeForm {
+  position: absolute;
+  top: 2%;
+  right: 1%;
+  width: 70%;
+  padding: 2%;
+  background-color: $formBackgroundColor;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px black;
+}
+
+//// These are all the elements within the recipe list ////
+
+.recipe {
+  margin: 2px 0px;
+  padding: 5px;
+  background-color: $recipeBackgroundColor;
+  border: 1px solid black;
+}
+
+.recipeName {
+  padding: 5px;
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: $recipeNameBackgroundColor;
+  border: 1px solid black;
+}
+
+.recipeContents {
+  padding: 5px;
+}
+
+.recipeSubTitle {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+    
+.ingredientList {
+  margin: 0px 0px 5px 0px;
+  padding: 5px;
+  outline: 1px solid gray;
+}
+
+.ingredient {
+  
+}
+
+.directions {
+  padding: 5px;
+  outline: 1px solid gray;
+}
+
+.editBtn {
+  @extend .generalBtn;
+  width: 100px;
+  margin: 10px 10px 0px 0px;
+  background-color: $editBtnBackgroundColor;
+  color: $editBtnFontColor;
+  border-color: $editBtnBackgroundColor;
+}
+
+.deleteBtn {
+  @extend .generalBtn;
+  width: 100px;
+  margin: 10px 0px 0px 0px;
+  background-color: $deleteBtnBackgroundColor;
+  color: $deleteBtnFontColor;
+  border-color: $deleteBtnBackgroundColor;
+}
+
+//// These are all of the elements inside the recipe form ////
+
+.formTitle {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.formBtn {
+  @extend .generalBtn;
+  width: 100px;
+  margin: 5px 10px 0px 0px;
+  background-color: $formBtnBackgroundColor;
+  color: $formBtnFontColor;
+  border-color: $formBtnBackgroundColor;
+}
+
+.generalTextArea {
+  display: block;
+  width: 96%;
+  margin: 5px 0px;
+  resize: vertical;
+  font-family: $fontFamily;
+  font-size: 1em;
+}
+
+.nameTextArea {
+  @extend .generalTextArea;
+  height: 1.2em;
+}
+
+.contentTextArea {
+  @extend .generalTextArea;
+  height: 4.2em;
+}
+
+//// This is a class merely to modify visibility of other classes ////
+
+.notShown {
+  display: none;
+}
+

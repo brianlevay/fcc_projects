@@ -1,0 +1,64 @@
+!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Weather App - FreeCodeCamp</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+
+    <div id="page">
+      
+      <div id="header-sect" class="section">
+        Local Weather
+      </div>
+      
+      <div id="weather-sect" class="section">
+        <div id="location-sect">
+          <span id="location">Imagination Land</span>
+        </div>
+        <div id="error-sect">
+          <span id="error">Error: </span>
+        </div>
+        <div id="summary-sect">
+          <div id="column-icon">
+            <span id="icon"><img src="http://icons-ak.wxug.com/i/c/k/sunny.gif"></span>
+          </div>
+          <div id="column-summary">
+            <span id="weather">Perfect</span>
+          </div>
+          <div id="column-temp">
+            <span id="temp-f">75 F</span>
+            <span id="temp-c">24 C</span>
+          </div>
+          <div id="column-toggle">
+            <span id="toggle">F/C</span>
+          </div>
+        </div>
+        <div id="detail-sect">
+          <span class="weather-cat">Relative Humidity: </span><span id="humidity" class="weather-info">30%</span><br>
+          <span class="weather-cat">Precipitation: </span><span id="precip" class="weather-info">0.00 in (0 mm)</span><br>
+          <span class="weather-cat">Wind: </span><span id="wind" class="weather-info">Calm</span><br>
+          <span class="weather-cat">Station: </span><span id="station" class="weather-info">Imagination Land</span><br>
+          <span class="weather-cat">Time: </span><span id="time" class="weather-info">Always</span><br>
+          <span class="weather-cat">Forecast: </span><span id="forecast" class="weather-info">Perfect forever...</span>
+        </div>
+      </div>
+      
+      <div id="footer-sect" class="section">
+        <div id="column-logo">
+          <a id="logo-span" href="https://www.wunderground.com" target="_blank"><img id="logo" src="http://icons.wxug.com/graphics/wu2/logo_130x80.png"></a>
+        </div>
+        <div id="column-footer">
+          <span id="footer-txt">Created by Brian LeVay, June 2016, and built as part of the <a href="https://freecodecamp.com" target="_blank">FreeCodeCamp</a> curriculum. Powered by the <a href="http://api.wunderground.com/api/" target="_blank">Weather Underground API</a></span>
+        </div>  
+      </div>
+        
+    </div>
+
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script src="js/index.js"></script>
+
+  </body>
+</html>

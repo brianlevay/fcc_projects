@@ -1,0 +1,856 @@
+///////////////////////////////////////////////////////////////////////////
+//// Section 0.0: Game Rules ////
+///////////////////////////////////////////////////////////////////////////
+
+// 1. Player health and enemy health always have a max of 100%. You can't bank health.
+// 2. Damage received and damage dealt (% health) are calculated as a function of (playerTotalStrength-enemyStrength),
+//    with a random multiplier that reduces the impact (to simulate dodging)
+// 3. Enemy strength increases every level, and boss strength is higher than final enemy strength
+// 4. Player base strength increases every time the player levels up based on XP
+// 5. Player total strength is a combination of player base strength and weapon strength
+// 6. Players get XP for damaging enemies, proportional to the amount of damage dealt
+
+///////////////////////////////////////////////////////////////////////////
+//// Section 1.0: Global Variables ////
+///////////////////////////////////////////////////////////////////////////
+
+//// These are the constraints used to build the canvas layers ////
+
+var t = {
+  tile: 10, 
+  mapWidthTiles: 120,
+  mapHeightTiles: 120,
+  marginTiles: 2,
+  minRoomTiles: 20,
+  maxRoomTiles: 40,
+  wallTiles: 1,
+  doorTiles: 3,
+  doorStandoffTiles: 3,
+  portalWidthTiles: 3,
+  portalHeightTiles: 3,
+  itemWidthTiles: 2,
+  itemHeightTiles: 2,
+  bossWidthTiles: 4,
+  bossHeightTiles: 4,
+  playerWidthTiles: 2,
+  playerHeightTiles: 2,
+  visibleTiles: 16
+};
+
+var s = {
+  mapWidth: t.mapWidthTiles * t.tile,
+  mapHeight: t.mapHeightTiles * t.tile,
+  margin: t.marginTiles * t.tile,
+  playerWidth: t.playerWidthTiles * t.tile,
+  playerHeight: t.playerHeightTiles * t.tile,
+  viewWidth: 60 * t.tile,
+  viewHeight: 40 * t.tile
+};
+
+var c = {
+  wallColor: [130,130,130,1],
+  roomColor: [255,255,204,1],
+  portalColor: [0,0,0,1],
+  weaponColor: [204,102,255,1],
+  healthColor: [0,153,51,1],
+  enemyColor: [255,51,0,1],
+  bossColor: [255,55,0,1],
+  playerColor: [0,0,255,1],
+  darknessColor: [0,0,0,1]
+};
+
+var game = {
+  maxGameLevels: 5,
+  healthItemVal: 20,
+  weaponStrength: [20,40,60,80,100],
+  enemyStrength: [80,110,140,170,200],
+  bossStrength: 280,
+  playerStrength: [100,120,140,160,180,200,220,240,260,280,300],
+  playerLevelXP: 500,
+  startingWeapon: "Fists",
+  weaponItems: ["Club","Dagger","Sword","Axe","Lightsaber"]
+};
+
+var playerViewX = s.viewWidth/2 - s.playerWidth/2;
+var playerViewY = s.viewHeight/2 - s.playerHeight/2;
+
+///////////////////////////////////////////////////////////////////////////
+//// Section 2.0: Map Layer Creation ////
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+//// Section 2.1: Rooms and Doors Creation ////
+///////////////////////////////////////////////////////////////////////////
+
+//// This is the function that builds a new room, anchored to one corner passed to it. Coordinates in tile units //// 
+
+function buildRoom(gen,tl,tr,bl,br) {
+  var minX, minY, maxX, maxY;
+  var width = Math.floor(Math.random()*(t.maxRoomTiles-t.minRoomTiles+1)) + t.minRoomTiles;
+  var height = Math.floor(Math.random()*(t.maxRoomTiles-t.minRoomTiles+1)) + t.minRoomTiles;
+  if (tl.length == 2) {
+    minX = tl[0]; 
+    minY = tl[1]; 
+    maxX = tl[0] + width; 
+    maxY = tl[1] + height;
+  } else if (tr.length == 2) {
+    minX = tr[0] - width; 
+    minY = tr[1]; 
+    maxX = tr[0]; 
+    maxY = tr[1] + height;
+  } else if (bl.length == 2) {
+    minX = bl[0]; 
+    minY = bl[1] - height; 
+    maxX = bl[0] + width; 
+    maxY = bl[1];
+  } else if (br.length == 2) {
+    minX = br[0] - width; 
+    minY = br[1] - height; 
+    maxX = br[0]; 
+    maxY = br[1];
+  }
+  if (minX < t.marginTiles) {minX = t.marginTiles;}
+  if (maxX > t.mapWidthTiles - t.marginTiles) {maxX = t.mapWidthTiles - t.marginTiles;}
+  if (minY < t.marginTiles) {minY = t.marginTiles;}
+  if (maxY > t.mapHeightTiles - t.marginTiles) {maxY = t.mapHeightTiles - t.marginTiles;}
+    
+  var room = {gen:gen, tl:[minX,minY], tr:[maxX,minY], bl:[minX,maxY], br:[maxX,maxY]};
+  return room;
+}
+
+//// This checks whether the new room clears the existing ones. Coordinates in tile units. ////
+
+function testClear(rooms,room) {
+  var clear = true;
+  var numRooms = rooms.length;
+  for (var n = 0; n < numRooms; n++) {
+    //// to clear, rooms can't share any common y-range OR they can't share common x-range (both not needed) ////
+    var clearThis = false;
+    if (room.tl[0] >= rooms[n].tr[0] || room.tr[0] <= rooms[n].tl[0]) {clearThis = true;}
+    if (room.tl[1] >= rooms[n].bl[1] || room.bl[1] <= rooms[n].tl[1]) {clearThis = true;}
+    if (clearThis === false) {clear = false; break;}
+  }
+  if (clear === true && (room.tr[0]-room.tl[0])>10 && (room.bl[1]-room.tl[1])>10) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+//// This builds a door between two rooms. Coordinates are in tile units ////
+
+function buildDoor(room1,room2,side) {
+  var door = {};
+  var standoff = t.wallTiles + t.doorStandoffTiles;
+  if (side == 1) {
+    var minPosX = Math.max(room1.tl[0],room2.tl[0]) + standoff;
+    var maxPosX = Math.min(room1.tr[0],room2.tr[0]) - standoff - t.doorTiles;
+    var minPosY = room2.bl[1] - standoff;
+    var maxPosY = room1.tl[1] + standoff;
+  } else if (side == 2) {
+    var minPosX = room1.tr[0] - standoff;
+    var maxPosX = room2.tl[0] + standoff;
+    var minPosY = Math.max(room1.tl[1],room2.tl[1]) + standoff;
+    var maxPosY = Math.min(room1.bl[1],room2.bl[1]) - standoff - t.doorTiles;
+  } else if (side == 3) {
+    var minPosX = Math.max(room1.tl[0],room2.tl[0]) + standoff;
+    var maxPosX = Math.min(room1.tr[0],room2.tr[0]) - standoff - t.doorTiles;
+    var minPosY = room1.bl[1] - standoff;
+    var maxPosY = room2.tl[1] + standoff;
+  } else if (side == 4) {
+    var minPosX = room2.tr[0] - standoff;
+    var maxPosX = room1.tl[0] + standoff;
+    var minPosY = Math.max(room1.tl[1],room2.tl[1]) + standoff;
+    var maxPosY = Math.min(room1.bl[1],room2.bl[1]) - standoff - t.doorTiles;
+  }
+  if (side == 1 || side == 3) {
+    var minX = Math.floor(Math.random()*(maxPosX-minPosX+1))+minPosX;
+    var maxX = minX + t.doorTiles;
+    var minY = minPosY;
+    var maxY = maxPosY;
+  } else if (side == 2 || side == 4) {
+    var minX = minPosX;
+    var maxX = maxPosX;
+    var minY = Math.floor(Math.random()*(maxPosY-minPosY+1))+minPosY;
+    var maxY = minY + t.doorTiles;
+  }
+  door = {tl:[minX,minY], tr:[maxX,minY], bl:[minX,maxY], br:[maxX,maxY]};
+  return door;
+}
+
+//// Uses buildRoom(), testClear(), and buildDoor(). This builds a set of rooms that snap together and don't overlap, and it also builds doors betwen them. Coordinates are in tile units ////
+
+function createRooms() {
+  var rooms = [];
+  var doors = [];
+  
+  var seedX = Math.floor(Math.random()*(t.mapWidthTiles/2));
+  var seedY = Math.floor(Math.random()*(t.mapHeightTiles/2));
+  var newRoom = buildRoom(1,[seedX,seedY],[],[],[]);
+  rooms.push(newRoom);
+  
+  for (var gen = 1; gen < 4; gen++) {
+    var roomsExisting = rooms.slice(0);
+    var numRoomsExisting = roomsExisting.length;
+    for (var n = 0; n < numRoomsExisting; n++) {
+      if (roomsExisting[n].gen == gen) {
+        for (var side = 1; side <= 4; side++) {
+          var tl = [];
+          var tr = [];
+          var bl = [];
+          var br = [];
+          if (side == 1) {bl = roomsExisting[n].tl;}
+          if (side == 2) {tl = roomsExisting[n].tr;}
+          if (side == 3) {tr = roomsExisting[n].br;}
+          if (side == 4) {br = roomsExisting[n].bl;}
+          var newRoom = buildRoom(gen+1,tl,tr,bl,br);
+          if (testClear(rooms,newRoom)) {
+            rooms.push(newRoom);
+            var newDoor = buildDoor(roomsExisting[n],newRoom,side);
+            doors.push(newDoor);
+          }
+        }
+      }
+    }
+  }
+  var mapLayout = {rooms: rooms,doors: doors};
+  return mapLayout;
+}
+
+///////////////////////////////////////////////////////////////////////////
+//// Section 2.2: Place Items (Enemies, etc) on Map ////
+///////////////////////////////////////////////////////////////////////////
+
+//// This creates a portal that leads to the next level ////
+
+function createPortal(room) {
+  var minPosX = room.tl[0] + t.wallTiles;
+  var maxPosX = room.tr[0] - t.portalWidthTiles - t.wallTiles;
+  var minPosY = room.tl[1] + t.wallTiles;
+  var maxPosY = room.bl[1] - t.portalHeightTiles - t.wallTiles;
+  if (Math.random()<0.5) {var minX = minPosX;} else {var minX = maxPosX;}
+  if (Math.random()<0.5) {var minY = minPosY;} else {var minY = maxPosY;}
+  var maxX = minX + t.portalWidthTiles;
+  var maxY = minY + t.portalHeightTiles;
+  var portal = {tl:[minX,minY], tr:[maxX,minY], bl:[minX,maxY], br:[maxX,maxY]};
+  
+  return portal;
+}
+
+//// This creates a boss object ////
+
+function createBoss(room) {
+  var minPosX = room.tl[0] + 3*t.wallTiles;
+  var maxPosX = room.tr[0] - t.bossWidthTiles - 3*t.wallTiles;
+  var minPosY = room.tl[1] + 3*t.wallTiles;
+  var maxPosY = room.bl[1] - t.bossHeightTiles - 3*t.wallTiles;
+  var minX = Math.floor(Math.random()*(maxPosX-minPosX+1)) + minPosX;
+  var minY = Math.floor(Math.random()*(maxPosY-minPosY+1)) + minPosY;
+  var maxX = minX + t.bossWidthTiles;
+  var maxY = minY + t.bossHeightTiles;
+  var boss = {tl:[minX,minY], tr:[maxX,minY], bl:[minX,maxY], br:[maxX,maxY]};
+  
+  return boss;
+}
+
+//// This creates an unspecified item, away from the walls. The type is handled later ////
+
+function createItem(room) {
+  var minPosX = room.tl[0] + 3*t.wallTiles;
+  var maxPosX = room.tr[0] - t.itemWidthTiles - 3*t.wallTiles;
+  var minPosY = room.tl[1] + 3*t.wallTiles;
+  var maxPosY = room.bl[1] - t.itemHeightTiles - 3*t.wallTiles;
+  var minX = Math.floor(Math.random()*(maxPosX-minPosX+1)) + minPosX;
+  var minY = Math.floor(Math.random()*(maxPosY-minPosY+1)) + minPosY;
+  var maxX = minX + t.itemWidthTiles;
+  var maxY = minY + t.itemHeightTiles;
+  var item = {tl:[minX,minY], tr:[maxX,minY], bl:[minX,maxY], br:[maxX,maxY]};
+  
+  return item;
+}
+
+///////////////////////////////////////////////////////////////////////////
+//// Section 2.3: Building the Map and Drawing the Canvas ////
+///////////////////////////////////////////////////////////////////////////
+
+//// This is a generic function for drawing rectangles ////
+
+function drawItem(context,item,margin,color,text) {
+  var colorStr = "rgba(" + color.join(',') + ")";
+  var tlX = (item.tl[0] + margin) * t.tile;
+  var tlY = (item.tl[1] + margin) * t.tile;
+  var width = (item.tr[0] - item.tl[0] - 2 * margin) * t.tile;
+  var height = (item.bl[1] - item.tl[1] - 2 * margin) * t.tile;
+  context.fillStyle = colorStr;
+  context.fillRect(tlX,tlY,width,height);
+  context.font="12px Monospace";
+  context.fillStyle = "white";
+  context.fillText(text,tlX+6,tlY+12);
+}
+  
+//// This is the function that builds a full new map in tile units, and returns the details for later use. It also creates the canvas and draws the map in pixels ////
+
+function createMapLayer(level) {
+  if (!document.getElementById("levelMap")){
+    var mapCanvas = document.createElement("canvas");
+    var container = document.getElementById("gameSect");
+    container.appendChild(mapCanvas);
+    mapCanvas.setAttribute("id","levelMap");
+    mapCanvas.setAttribute("class","map");
+    mapCanvas.setAttribute("width", s.mapWidth);
+    mapCanvas.setAttribute("height", s.mapHeight);
+  } else {
+    var mapCanvas = document.getElementById("levelMap");
+  }
+  var mapContext = mapCanvas.getContext('2d');
+  mapContext.fillStyle = "rgba(" + c.wallColor.join(',') + ")";
+  mapContext.fillRect(0,0,s.mapWidth,s.mapHeight);
+  
+  //// This creates and draws rooms and doors ////
+  
+  var mapLayout = createRooms();
+  var rooms = mapLayout.rooms;
+  var doors = mapLayout.doors;
+  var numRooms = rooms.length;
+  var numDoors = doors.length;
+  for (var n = 0; n < numRooms; n++) {
+    drawItem(mapContext,rooms[n],t.wallTiles,c.roomColor,"");
+  }
+  for (var d = 0; d < numDoors; d++) {
+    drawItem(mapContext,doors[d],0,c.roomColor,"");
+  }
+  
+  //// This creates and draws items in each room ////
+  
+  var enemyItems = [];
+  var healthItems = [];
+  for (var n = 0; n < numRooms-2; n++) {
+    if (Math.random() > 0.5) {
+      var enemy = createItem(rooms[n]);
+      enemyItems.push(enemy);
+    } else {
+      var health = createItem(rooms[n]);
+      healthItems.push(health);
+    }
+  }
+  var weapon = createItem(rooms[numRooms-2])
+  var boss = createBoss(rooms[numRooms-1]);
+  var portal = createPortal(rooms[numRooms-1]);
+ 
+  if (level === game.maxGameLevels) {
+    drawItem(mapContext,boss,0,c.bossColor,"B");
+  } else {
+    drawItem(mapContext,portal,0,c.portalColor,"");
+  }
+  drawItem(mapContext,weapon,0,c.weaponColor,"W");
+  var numEnemies = enemyItems.length;
+  for (var n = 0; n < numEnemies; n++) {
+    drawItem(mapContext,enemyItems[n],0,c.enemyColor,"E");
+  }
+  var numHealth = healthItems.length;
+  for (var n = 0; n < numHealth; n++) {
+    drawItem(mapContext,healthItems[n],0,c.healthColor,"H");
+  }
+  
+  var mapFeatures = {rooms: rooms, boss: boss, portal: portal, weapon: weapon, enemyItems: enemyItems, healthItems: healthItems};
+  return mapFeatures;
+}
+
+///////////////////////////////////////////////////////////////////////////
+//// Section 3.0: Player Layer Creation ////
+///////////////////////////////////////////////////////////////////////////
+
+//// This builds and then draws the player as a separate canvas layer, and it also finds a starting location on the map for the player (in the map's tile coordinates) ////
+
+function createPlayerLayer(mapFeatures) {
+  if (!document.getElementById("mainPlayer")){
+    var playerCanvas = document.createElement("canvas");
+    var container = document.getElementById("gameSect");
+    container.appendChild(playerCanvas);
+    playerCanvas.setAttribute("id","mainPlayer");
+    playerCanvas.setAttribute("class","player");
+    playerCanvas.setAttribute("width", s.playerWidth);
+    playerCanvas.setAttribute("height", s.playerHeight);
+  } else {
+    var playerCanvas = document.getElementById("mainPlayer");
+  }
+  var playerContext = playerCanvas.getContext('2d');
+  playerContext.fillStyle = "rgba(" + c.playerColor.join(',') + ")";
+  playerContext.fillRect(0,0,s.playerWidth,s.playerHeight);
+  
+  var rooms = mapFeatures.rooms;
+  var portal = mapFeatures.portal;
+  var roomStartNum = Math.floor(Math.random()*(rooms.length));
+  var roomStart = rooms[roomStartNum];
+  
+  //// This tests if the portal is inside the starting room, and if so, re-assigns the starting room ////
+  
+  var inRoom = true;
+  if (roomStart.tl[0] >= portal.tr[0] || roomStart.tr[0] <= portal.tl[0]) {inRoom = false;}
+  if (roomStart.tl[1] >= portal.bl[1] || roomStart.bl[1] <= portal.tl[1]) {inRoom = false;}
+  if (inRoom === true) {
+    if (roomStartNum < rooms.length-1) {
+      roomStartNum = roomStartNum + 1;
+      roomStart = rooms[roomStartNum];
+    } else {
+      roomStartNum = roomStartNum - 1;
+      roomStart = rooms[roomStartNum];
+    }
+  }
+  var minPosX = roomStart.tl[0] + t.wallTiles;
+  var maxPosX = roomStart.tr[0] - t.playerWidthTiles - t.wallTiles;
+  var minPosY = roomStart.tl[1] + t.wallTiles;
+  var maxPosY = roomStart.bl[1] - t.playerHeightTiles - t.wallTiles;
+  if (Math.random()<0.5) {var minX = minPosX;} else {var minX = maxPosX;}
+  if (Math.random()<0.5) {var minY = minPosY;} else {var minY = maxPosY;}
+  var maxX = minX + t.playerWidthTiles;
+  var maxY = minY + t.playerHeightTiles;
+  
+  var playerOnMap = {tl:[minX,minY], tr:[maxX,minY], bl:[minX,maxY], br:[maxX,maxY]};  
+  return playerOnMap;
+} 
+
+///////////////////////////////////////////////////////////////////////////
+//// Section 4.0: Darkness Layer Creation ////
+///////////////////////////////////////////////////////////////////////////
+
+//// This builds and then draws a black canvas with a transparent hole over the player ////
+
+function createDarknessLayer() {
+  if (!document.getElementById("darknessLayer")){
+    var darknessCanvas = document.createElement("canvas");
+    var container = document.getElementById("gameSect");
+    container.appendChild(darknessCanvas);
+    darknessCanvas.setAttribute("id","darknessLayer");
+    darknessCanvas.setAttribute("class","darkness");
+    darknessCanvas.setAttribute("width", s.viewWidth);
+    darknessCanvas.setAttribute("height", s.viewHeight);
+    darknessCanvas.setAttribute("style","visibility:visible");
+  } else {
+    var darknessCanvas = document.getElementById("darknessLayer");
+  }
+  var darknessContext = darknessCanvas.getContext('2d');
+  darknessContext.fillStyle = "rgba(" + c.darknessColor.join(',') + ")";
+  darknessContext.fillRect(0,0,s.viewWidth,s.viewHeight);
+  
+  var visMinX = s.viewWidth/2 - (t.visibleTiles * t.tile)/2;
+  var visMinY = s.viewHeight/2 - (t.visibleTiles * t.tile)/2;
+  darknessContext.clearRect(visMinX+(0*t.tile),visMinY+(2*t.tile),((t.visibleTiles-0)*t.tile),((t.visibleTiles-4)*t.tile));
+  darknessContext.clearRect(visMinX+(1*t.tile),visMinY+(1*t.tile),((t.visibleTiles-2)*t.tile),((t.visibleTiles-2)*t.tile));
+  darknessContext.clearRect(visMinX+(2*t.tile),visMinY+(0*t.tile),((t.visibleTiles-4)*t.tile),((t.visibleTiles-0)*t.tile));
+}
+
+///////////////////////////////////////////////////////////////////////////
+//// Section 5.0: Dynamic Functions for Game Play ////
+///////////////////////////////////////////////////////////////////////////
+
+//// This function reads the pixel values on the map and item layers adjacent to the player in the direction of travel. It then gathers information about what those pixels represent ////
+//// Note that alpha is always equal to 255, even if you draw with alpha 0-1. Alpha is not preserved. Instead, new rgb colors are calculated and stored ////
+
+function checkPixels(delX,delY,playerOnMap) {
+  var mapCanvas = document.getElementById("levelMap");
+  var mapContext = mapCanvas.getContext('2d');
+  
+  var minX = playerOnMap.tl[0];
+  var minY = playerOnMap.tl[1];
+  var maxX = playerOnMap.br[0];
+  var maxY = playerOnMap.br[1];
+  
+  if (delX < 0 && delY === 0) {
+    var searchX = (minX * t.tile) - 1;
+    var searchY = (minY * t.tile);
+    var searchHeight = s.playerHeight;
+    var searchWidth = 1;
+  } else if (delX > 0 && delY === 0) {
+    var searchX = (minX * t.tile) + s.playerWidth;
+    var searchY = (minY * t.tile);
+    var searchHeight = s.playerHeight;
+    var searchWidth = 1;
+  } else if (delX === 0 && delY < 0) {
+    var searchX = (minX * t.tile);
+    var searchY = (minY * t.tile) - 1;
+    var searchHeight = 1;
+    var searchWidth = s.playerWidth;
+  } else if (delX === 0 && delY > 0) {
+    var searchX = (minX * t.tile);
+    var searchY = (minY * t.tile) + s.playerHeight;
+    var searchHeight = 1;
+    var searchWidth = s.playerWidth;
+  }  
+  var imageMap = mapContext.getImageData(searchX,searchY,searchWidth,searchHeight);
+  var pixelsMap = imageMap.data;
+  
+  var wall = false;
+  var portal = false;
+  var weapon = false;
+  var health = false;
+  var enemy = [false,0];
+  var boss = [false,0];
+  var numPixelVals = pixelsMap.length * 4;
+  for (var p = 0; p < numPixelVals; p += 4) {
+    if (pixelsMap[p] === c.wallColor[0] && 
+        pixelsMap[p+1] === c.wallColor[1] && 
+        pixelsMap[p+2] === c.wallColor[2]) {
+      wall = true;
+    }
+    if (pixelsMap[p] === c.portalColor[0] && 
+        pixelsMap[p+1] === c.portalColor[1] && 
+        pixelsMap[p+2] === c.portalColor[2]) {
+      portal = true;
+    }
+    if (pixelsMap[p] === c.weaponColor[0] && 
+        pixelsMap[p+1] === c.weaponColor[1] && 
+        pixelsMap[p+2] === c.weaponColor[2]) {
+      weapon = true;
+    }
+    if (pixelsMap[p] === c.healthColor[0] && 
+        pixelsMap[p+1] === c.healthColor[1] && 
+        pixelsMap[p+2] === c.healthColor[2]) {
+      health = true;
+    }
+    if (pixelsMap[p] >= (c.enemyColor[0]-100) && 
+        pixelsMap[p+1] === c.enemyColor[1] && 
+        pixelsMap[p+2] === c.enemyColor[2]) {
+      enemy = [true,pixelsMap[p]];
+    }
+    if (pixelsMap[p] >= (c.bossColor[0]-100) && 
+        pixelsMap[p+1] === c.bossColor[1] && 
+        pixelsMap[p+2] === c.bossColor[2]) {
+      boss = [true,pixelsMap[p]];
+    }
+  }
+  
+  var info = {wall: wall, portal: portal, weapon: weapon, health: health, enemy: enemy, boss};
+  return info;
+}
+
+//// This creates the function used to move the player, in units of tiles, relative to the map. ////
+
+function movePlayer(delX,delY,playerOnMap) {  
+  var minX = playerOnMap.tl[0] + delX;
+  var minY = playerOnMap.tl[1] + delY;
+  var maxX = playerOnMap.br[0] + delX;
+  var maxY = playerOnMap.br[1] + delY;
+  
+  var playerUpdatedOnMap = {tl:[minX,minY], tr:[maxX,minY], bl:[minX,maxY], br:[maxX,maxY]};
+  return playerUpdatedOnMap;
+}
+
+//// This modifies the item of a specific type (passed as array through itemSet) that is closest to the place where the player will move ////
+
+function modifyItem(delX,delY,playerOnMap,itemSet,newColor,newText) {
+  var mapCanvas = document.getElementById("levelMap");
+  var mapContext = mapCanvas.getContext('2d');
+  if (itemSet.length > 1) {
+    var minX = playerOnMap.tl[0] + delX;
+    var minY = playerOnMap.tl[1] + delY;
+    var numItems = itemSet.length;
+    var closest = 0;
+    var minDistance = 100000;
+    for (var n = 0; n < numItems; n++) {
+      var latDist = itemSet[n].tl[0] - minX;
+      var verDist = itemSet[n].tl[1] - minY;
+      var distance = Math.sqrt(Math.pow(latDist,2) + Math.pow(verDist,2));
+      if (distance < minDistance) {minDistance = distance; closest = n;}
+    }
+    drawItem(mapContext,itemSet[closest],0,newColor,newText);
+  } else {
+    drawItem(mapContext,itemSet,0,newColor,newText);
+  }
+}
+
+//// This calculates the damage given and the damaged received by attacking an enemy ////
+
+function attackEnemy(playerStrength,enemyStrength) {
+  var del = playerStrength-enemyStrength;
+  var minDmg = 5;
+  var maxDmg = 80;
+  var minDel = -80;
+  var maxDel = 80;
+  var a = (maxDmg-minDmg)/Math.pow(maxDel-minDel,2);
+  var b = minDel;
+  var c = minDmg;
+  var damage = a*Math.pow(del-b,2)+c;
+  var injury = a*Math.pow((-del)-b,2)+c;
+  if (del < minDel) {damage = minDmg; injury = maxDmg;}
+  if (del > maxDel) {damage = maxDmg; injury = minDmg;}
+  
+  if (Math.random()>0.66) {
+    var damageReduce = 0.5*Math.random() + 0.5;
+    damage = damage * damageReduce;
+  }
+  if (Math.random()>0.33) {
+    var injuryReduce = 0.5*Math.random() + 0.5;
+    injury = injury * injuryReduce;
+  }
+   
+  damage = Math.round(damage);
+  injury = Math.round(injury);
+  var attack = {damage: damage, injury: injury};
+  return attack;
+}
+
+///////////////////////////////////////////////////////////////////////////
+//// Section 6.0: Page Layout and View Setup ////
+///////////////////////////////////////////////////////////////////////////
+
+//// Because the canvases are using absolute positioning, this function sets up the surround div (gameSect), the footer div, and it centers the player canvas (because that doesn't need to be updated in createView) ////
+
+function initializeView() {
+  var windowView = document.getElementById("gameSect");
+  windowView.style.width = s.viewWidth + "px";
+  windowView.style.height = s.viewHeight + "px";
+  
+  var playerCanvas = document.getElementById("mainPlayer");
+  playerCanvas.style.left = playerViewX + "px";
+  playerCanvas.style.top =  playerViewY + "px";
+  
+  createDarknessLayer();
+}
+
+//// This renders the new view, by taking the player position relative to the map (in tile coordinates) and adjusting the map relative to the player in pixels ////
+
+function createView(playerOnMap) {
+  var mapCanvas = document.getElementById("levelMap");
+  mapCanvas.style.left = (-playerOnMap.tl[0] * t.tile) + playerViewX + "px";
+  mapCanvas.style.top = (-playerOnMap.tl[1] * t.tile) + playerViewY + "px";
+}  
+
+//// This toggles the visibility of the darkness layer ////
+
+function toggleDarkness() {
+  var darknessCanvas = document.getElementById("darknessLayer");
+  if (darknessCanvas.style.visibility == "visible") {
+    darknessCanvas.style.visibility = "hidden";
+  } else {
+    darknessCanvas.style.visibility = "visible";
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////
+//// Section 7.0: React Section ////
+///////////////////////////////////////////////////////////////////////////
+
+var Game = React.createClass({ 
+  getInitialState: function() {
+    return {
+      gameLvl: 1, playerLvl: 1, playerXP: 0, nextLvlXP: game.playerLevelXP, 
+      playerStrength: game.playerStrength[0], 
+      weapon: game.startingWeapon, weaponStrength: 0, 
+      playerHealth: 100, enemyStrength: game.enemyStrength[0],
+      win: false, lose: false
+    };
+  },
+  componentDidMount: function() {
+    var mapFeatures = createMapLayer(1);
+    var playerOnMap = createPlayerLayer(mapFeatures);
+    initializeView();
+    createView(playerOnMap);
+    document.onkeypress = this.moveByKey;
+    this.setState({mapFeatures: mapFeatures});
+    this.setState({playerOnMap: playerOnMap});
+  },
+  newGame: function() {
+    var notification = document.getElementById("notification");
+    notification.style.visibility = "hidden";
+    var mapFeatures = createMapLayer(1);
+    var playerOnMap = createPlayerLayer(mapFeatures);
+    createView(playerOnMap);
+    this.setState({mapFeatures: mapFeatures});
+    this.setState({playerOnMap: playerOnMap});
+    this.setState({
+      gameLvl: 1, playerLvl: 1, playerXP: 0, nextLvlXP: game.playerLevelXP, 
+      playerStrength: game.playerStrength[0], 
+      weapon: game.startingWeapon, weaponStrength: 0, 
+      playerHealth: 100, enemyStrength: game.enemyStrength[0],
+      win: false, lose: false
+    });
+  },
+  newLevel: function() {
+    var newLevel = this.state.gameLvl + 1;
+    var mapFeatures = createMapLayer(newLevel);
+    var playerOnMap = createPlayerLayer(mapFeatures);
+    createView(playerOnMap);
+    this.setState({mapFeatures: mapFeatures});
+    this.setState({playerOnMap: playerOnMap});
+    this.setState({gameLvl: newLevel});
+    this.setState({enemyStrength: game.enemyStrength[newLevel-1]});
+  },
+  tryMove: function(delX,delY) {
+    if (this.state.win !== true && this.state.lose !== true) {
+      var info = checkPixels(delX,delY,this.state.playerOnMap);
+      if (info.portal === true) {
+        this.newLevel();
+      } else if (info.weapon === true) {
+        this.findWeapon(delX,delY);
+      } else if (info.health === true) {
+        this.findHealth(delX,delY);
+      } else if (info.enemy[0] === true || info.boss[0] === true) {
+        this.findBadGuy(delX,delY,info);
+      } else if (info.wall === false) {
+        this.notWall(delX,delY);    
+      }
+    }
+  },
+  moveByKey: function(e) {
+    var press = e.which || e.keyCode;
+    var char = press.charCode;
+    if (press == '106') {this.tryMove(-1,0);} // letter j, left //
+    if (press == '105') {this.tryMove(0,-1);} // letter i, up //
+    if (press == '107') {this.tryMove(1,0);} // letter k, right //
+    if (press == '109') {this.tryMove(0,1);} // letter m, down //
+  },
+  findWeapon: function(delX,delY) {
+    modifyItem(delX,delY,this.state.playerOnMap,this.state.mapFeatures.weapon,c.roomColor,"");
+    var playerUpdatedOnMap = movePlayer(delX,delY,this.state.playerOnMap);
+    createView(playerUpdatedOnMap);
+    this.setState({playerOnMap: playerUpdatedOnMap}); 
+    this.setState({weapon: game.weaponItems[this.state.gameLvl-1]});
+    this.setState({weaponStrength: game.weaponStrength[this.state.gameLvl-1]});
+  },
+  findHealth: function(delX,delY) {
+    if (this.state.playerHealth < 100) {
+      modifyItem(delX,delY,this.state.playerOnMap,this.state.mapFeatures.healthItems,c.roomColor,"");
+      var newHealth = this.state.playerHealth + game.healthItemVal;
+      if (newHealth > 100) {newHealth = 100;}
+      this.setState({playerHealth: newHealth});
+    }
+    var playerUpdatedOnMap = movePlayer(delX,delY,this.state.playerOnMap);
+    createView(playerUpdatedOnMap);
+    this.setState({playerOnMap: playerUpdatedOnMap});   
+  },
+  findBadGuy: function(delX,delY,info) {
+    var playerCurrentOnMap = this.state.playerOnMap;
+    var playerUpdatedOnMap = movePlayer(0.5*delX,0.5*delY,this.state.playerOnMap);
+    createView(playerUpdatedOnMap);
+    setTimeout(function(){
+      createView(playerCurrentOnMap);
+    },200);
+    
+    var win = false;
+    var lose = false;
+    var badGuyStrength = this.state.enemyStrength;
+    var badGuyOrigColor = c.enemyColor;
+    var badGuyCurrentRed = info.enemy[1];
+    var itemSet = this.state.mapFeatures.enemyItems;
+    var label = "E";
+    if (info.boss[0] === true) {
+      badGuyStrength = game.bossStrength;
+      badGuyOrigColor = c.bossColor;
+      badGuyCurrentRed = info.boss[1];
+      itemSet = this.state.mapFeatures.boss;
+      label = "B";
+    }
+    
+    var playerStrength = this.state.weaponStrength + this.state.playerStrength;
+    var attack = attackEnemy(playerStrength,badGuyStrength);
+    var actualDamage = attack.damage;
+    var enemyHealth = (badGuyCurrentRed - (badGuyOrigColor[0]-100)) - actualDamage;
+    var newEnemyColor = [enemyHealth+(badGuyOrigColor[0]-100),badGuyOrigColor[1],badGuyOrigColor[2],badGuyOrigColor[3]]; 
+    var newEnemyLabel = "E";
+    if (enemyHealth <= 0) {
+      actualDamage = (badGuyCurrentRed - (badGuyOrigColor[0]-100));
+      newEnemyColor = c.roomColor;
+      newEnemyLabel = "";
+      if (info.boss[0] === true) {win = true;}
+    }
+    modifyItem(delX,delY,this.state.playerOnMap,itemSet,newEnemyColor,newEnemyLabel);
+    
+    var newPlayerHealth = this.state.playerHealth - attack.injury;
+    if (newPlayerHealth <= 0) {
+      newPlayerHealth = 0;
+      lose = true;
+    }
+    this.setState({playerHealth: newPlayerHealth});
+    
+    var newPlayerXP = this.state.playerXP + actualDamage;
+    this.setState({playerXP: newPlayerXP});
+    if (newPlayerXP >= this.state.nextLvlXP) {
+      this.setState({nextLvlXP: this.state.nextLvlXP + game.playerLevelXP});
+      this.setState({playerLvl: this.state.playerLvl + 1});
+      this.setState({playerStrength: game.playerStrength[this.state.playerLvl-1]});
+      this.setState({playerHealth: 100});
+    }
+    if (win === true) {this.youWin();}
+    if (lose === true) {this.youLose();}
+  },
+  notWall: function(delX,delY) {
+    var playerUpdatedOnMap = movePlayer(delX,delY,this.state.playerOnMap);
+    createView(playerUpdatedOnMap);
+    this.setState({playerOnMap: playerUpdatedOnMap});
+  },
+  youWin: function() {
+    var notification = document.getElementById("notification");
+    notification.innerHTML = "You Win!";
+    notification.style.visibility = "visible";
+    this.setState({win: true, lose: false});
+  },
+  youLose: function() {
+    var notification = document.getElementById("notification");
+    notification.innerHTML = "You Lose!";
+    notification.style.visibility = "visible";
+    this.setState({win: false, lose: true});
+  },
+  render: function(){
+    return (
+      <div>
+        <div className="row">
+          <button className="dirBtn" onClick={()=>this.tryMove(-1,0)}>Left (j)</button>
+          <button className="dirBtn" onClick={()=>this.tryMove(0,-1)}>Up (i)</button>
+          <button className="dirBtn" onClick={()=>this.tryMove(0,1)}>Down (m)</button>
+          <button className="dirBtn" onClick={()=>this.tryMove(1,0)}>Right (k)</button>
+        </div>
+        <div className="row">
+          <span className="infoSpan">
+            <span className="infoDesc">Game Lvl: </span>
+            {this.state.gameLvl} 
+          </span>  
+          <span className="infoSpan">
+            <span className="infoDesc">Weapon: </span>
+            {this.state.weapon} 
+          </span>
+          <span className="infoSpan">
+            <span className="infoDesc"></span>
+          </span>
+        </div>
+        <div className="row">
+          <span className="infoSpan">
+            <span className="infoDesc">Player Lvl: </span>
+            {this.state.playerLvl} 
+          </span>
+          <span className="infoSpan">
+            <span className="infoDesc">XP: </span>
+            {this.state.playerXP} / {this.state.nextLvlXP} 
+          </span>
+          <span className="infoSpan">
+            <span className="infoDesc">Health: </span>
+            {this.state.playerHealth} % 
+          </span>
+        </div>
+        <div className="row">
+          <span className="infoSpan">
+            <span className="infoDesc">Player Strength: </span>
+            {this.state.playerStrength} 
+          </span>
+          <span className="infoSpan">
+            <span className="infoDesc">Weapon Strength: </span>
+            {this.state.weaponStrength} 
+          </span>
+          <span className="infoSpan">
+            <span className="infoDesc">Total Strength: </span>
+            {this.state.weaponStrength + this.state.playerStrength} 
+          </span>
+        </div>
+        <div className="row">
+          <button className="otherBtn" onClick={this.newGame}>New Game</button>
+          <button className="otherBtn" onClick={toggleDarkness}>Darkness</button>
+        </div>
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <Game />,
+  document.getElementById('controlPanel')
+);

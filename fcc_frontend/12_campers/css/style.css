@@ -1,0 +1,119 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0375b4;
+}
+
+img {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.row, .rowTitle, .rowEntry {
+  display: table;
+  width: 100%;
+}
+
+.cell, .rank, .camper, .recent, .total {
+  display: table-cell;
+  height: 100%;
+  padding: 5px 1% 5px 1%;
+  text-align: center;
+  vertical-align: middle;
+  outline: 1px solid #4d4d4d;
+}
+
+.subCell, .pic, .name {
+  display: inline-block;
+  margin: 0px 5px 0px 5px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#pageSect {
+  margin: auto;
+  width: 70%;
+}
+
+#headerSect {
+  width: 100%;
+  min-width: 400px;
+  padding: 15px 5px 25px 5px;
+  text-align: center;
+  font-size: 2.8em;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+}
+
+#containerSect {
+  width: 100%;
+  min-width: 400px;
+  outline: 2px solid black;
+  box-shadow: 5px 5px 5px black;
+}
+#containerSect a {
+  color: black;
+}
+
+#footerSect {
+  width: 100%;
+  min-width: 400px;
+  padding: 25px 5px 15px 5px;
+  text-align: center;
+  font-size: 0.8em;
+  color: white;
+}
+#footerSect a {
+  color: white;
+}
+
+.rowTitle {
+  font-weight: bold;
+  background-color: #ffce00;
+}
+
+.rowEntry:nth-child(odd) {
+  background-color: #d9d9d9;
+}
+.rowEntry:nth-child(even) {
+  background-color: white;
+}
+
+.sortedBy {
+  color: white;
+  background-color: #262228;
+}
+
+.notSortedBy {
+  color: black;
+  background-color: #ffce00;
+}
+
+.rank {
+  width: 8%;
+}
+
+.camper {
+  width: 48%;
+  min-width: 200px;
+}
+
+.pic {
+  width: 20%;
+  min-width: 60px;
+}
+
+.name {
+  width: 50%;
+}
+
+.recent {
+  width: 18%;
+}
+
+.total {
+  width: 18%;
+}

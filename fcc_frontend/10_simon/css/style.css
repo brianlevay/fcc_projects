@@ -1,0 +1,196 @@
+body {
+  background-color: #a2a7ad;
+}
+
+#page {
+}
+
+/* The box styling was taken from http://stackoverflow.com/questions/5445491/height-equal-to-dynamic-width-css-fluid-layout */
+
+.box {
+  position: relative;
+  width: 60%;
+  margin: auto;
+  margin-top: 100px;
+  min-width: 350px;
+}
+
+.box:before {
+  content: "";
+  display: block;
+  padding-top: 100%; /* initial ratio of 1:1*/
+}
+
+#body {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: black;
+  border-radius: 100%;
+  box-shadow: 2vw 2vw 2vw #595959;
+}
+
+#green {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  right: 50%;
+  bottom: 50%;
+  border-width: 3vw 1.5vw 1.5vw 3vw;
+  border-style: solid;
+  border-color: black;
+  border-radius: 100% 0% 0% 0%;
+  background-color: green; /* #008000, 25% on lightness */
+}
+
+#red {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  right: 0%;
+  bottom: 50%;
+  border-width: 3vw 3vw 1.5vw 1.5vw;
+  border-style: solid;
+  border-color: black;
+  border-radius: 0% 100% 0% 0%;
+  background-color: #b30000; /* 35% on lightness */
+}
+
+#yellow {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  right: 50%;
+  bottom: 0%;
+  border-width: 1.5vw 1.5vw 3vw 3vw;
+  border-style: solid;
+  border-color: black;
+  border-radius: 0% 0% 0% 100%;
+  background-color: #b3b300; /* 35% on lightness */
+}
+
+#blue {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 0%;
+  bottom: 0%;
+  border-width: 1.5vw 3vw 3vw 1.5vw;
+  border-style: solid;
+  border-color: black;
+  border-radius: 0% 0% 100% 0%;
+  background-color: #0000b3; /* 35% on lightness */
+}
+
+#ctl-pnl {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  right: 25%;
+  bottom: 25%;
+  border-style: solid;
+  border-color: black;
+  border-width: 3vw;
+  border-radius: 100%;
+  background-color: black;
+}
+
+#name {
+  margin-top: 10%;
+  color: white;
+  text-align: center;
+  font-size: 8vw;
+  font-family: Arial;
+  font-weight: bold;
+}
+
+#name-i {
+  /* font-variant: small-caps; */
+  font-size: 8vw;
+}
+
+#r {
+  font-size: 1.2vw;
+}
+
+#ctl-sect {
+  position: relative;
+}
+
+#count-sect {
+  position: absolute;
+  top: 0%;
+  left: 10%;
+  color: white;
+}
+
+#counter {
+  height: 5vw;
+  width: 5vw;
+  background-color: #404040; /* 25% */
+  outline-style: inset;
+  outline-color: #404040;
+}
+
+#ct-tot {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-size: 3.2vw;
+  font-weight: bold;
+}
+
+#start-sect {
+  position: absolute;
+  top: 0%;
+  left: 39%;
+  color: white;
+}
+
+#start-btn {
+  height: 5vw;
+  width: 5vw;
+  border-radius: 100%;
+  border: 1.2vw solid black;
+  background-color: green;
+}
+
+#strict-sect {
+  position: absolute;
+  top: 0%;
+  right: 10%;
+  color: white;
+}
+
+#strict-btn {
+  height: 5vw;
+  width: 5vw;
+  border-radius: 100%;
+  border: 1.2vw solid black;
+  background-color: yellow;
+}
+
+#strict-notice {
+  margin-top: 20%;
+  text-align: center;
+  font-size: 0.9vw;
+  font-weight: bold;
+  color: black;
+}
+
+.btn-lbl {
+  text-align: center;
+  margin-top: 10%;
+  font-size: 1vw;
+}
+
+#footer-txt {
+  margin: 50px 0px 50px 0px;
+  text-align: center;
+}
+
+a {
+  color: white;
+}

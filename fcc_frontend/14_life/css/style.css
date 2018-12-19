@@ -1,0 +1,130 @@
+body {
+  background-color: #233237;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+#pageSect {
+  margin: auto;
+  text-align: center;
+}
+
+#headerSect {
+  margin: auto;
+  padding: 10px;
+  font-size: 2.8em;
+  font-weight: bold;
+}
+#headerSect a {
+  text-decoration: none;
+  color: white;
+}
+
+#containerSect {
+  margin: auto;
+}
+
+#footerSect {
+  margin: auto;
+  padding: 10px;
+  font-size: 0.8em;
+}
+#footerSect a {
+  color: white;
+}
+
+.controlPanel {
+  margin: auto;
+  padding: 10px;
+}
+
+.generalBtn, .controlBtn, .boardSizeBtn {
+  display: inline-block;
+  width: 100px;
+  height: 20px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px black;
+  background-color: #eac67a;
+  color: black;
+  font-weight: bold;
+}
+
+.controlBtn {
+  width: 100px;
+  height: 20px;
+}
+
+.generationCt {
+  padding: 2px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.gameBoard {
+  margin: auto;
+  padding: 10px;
+  font-size: 0em;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 2px;
+  box-shadow: 2px 2px 2px black;
+}
+
+.cell {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  outline: 1px solid black;
+}
+
+.s0 {
+  background-color: black;
+}
+
+.s1 {
+  background-color: #eac67a;
+}
+
+.setupPanel {
+  margin: auto;
+  padding: 10px;
+}
+
+.boardSizeBtn {
+  width: 120px;
+}
+
+.active {
+  color: white;
+  background-color: #984b43;
+}
+
+.smallBoard {
+  width: 300px;
+  height: 300px;
+}
+
+.mediumBoard {
+  width: 500px;
+  height: 500px;
+}
+
+.largeBoard {
+  width: 800px;
+  height: 800px;
+}
+
+.smallPanel {
+  width: 300px;
+}
+
+.mediumPanel {
+  width: 500px;
+}
+
+.largePanel {
+  width: 800px;
+}

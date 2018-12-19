@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Calculator - FreeCodeCamp</title>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+
+    <div id="page" class="container-fluid">
+      <div id="content">
+        <div id="calc-header">
+          <p id="title">Javascript Calculator</p>
+        </div>
+        <div id="prev-eqn">
+          <p id="eqn-capt">Most Recent Equation:</p>
+          <p id="eqn"></p>
+        </div>
+        <div id="calc-body">
+          <div id="screen">
+            <p></p>
+          </div>
+          <div id="button-sect">
+            <div class="btn-row row">
+              <div class="sm-col col-xs-4">
+                <button id="left-par" class="math" value="(" onclick=typeKey(this.value)>(</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="right-par" class="math" value=")" onclick=typeKey(this.value)>)</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="exponent" class="math" value="^" onclick=typeKey(this.value)>x<sup>y</sup></button>
+              </div>
+            </div>
+            <div class="btn-row row">
+              <div class="sm-col col-xs-4">
+                <button id="seven" class="number" value=7 onclick=typeKey(this.value)>7</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="eight" class="number" value=8 onclick=typeKey(this.value)>8</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="nine" class="number" value=9 onclick=typeKey(this.value)>9</button>
+              </div>
+            </div>
+            <div class="btn-row row">
+              <div class="sm-col col-xs-4">
+                <button id="four" class="number" value=4 onclick=typeKey(this.value)>4</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="five" class="number" value=5 onclick=typeKey(this.value)>5</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="six" class="number" value=6 onclick=typeKey(this.value)>6</button>
+              </div>
+            </div>
+            <div class="btn-row row">
+              <div class="sm-col col-xs-4">
+                <button id="one" class="number" value=1 onclick=typeKey(this.value)>1</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="two" class="number" value=2 onclick=typeKey(this.value)>2</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="three" class="number" value=3 onclick=typeKey(this.value)>3</button>
+              </div>
+            </div>
+            <div class="btn-row row">
+              <div class="sm-col col-xs-4">
+                <button id="zero" class="number" value=0 onclick=typeKey(this.value)>0</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="decimal" class="math" value="." onclick=typeKey(this.value)>.</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="plus" class="math" value="+" onclick=typeKey(this.value)>+</button>
+              </div>
+            </div>
+            <div class="btn-row row">
+              <div class="sm-col col-xs-4">
+                <button id="divide" class="math" value="/" onclick=typeKey(this.value)>/</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="minus" class="math" value="-" onclick=typeKey(this.value)>-</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="multiply" class="math" value="*" onclick=typeKey(this.value)>*</button>
+              </div>
+            </div>
+            <div class="btn-row row">
+              <div class="sm-col col-xs-4">
+                <button id="clear" class="math" onclick=clearScr()>C</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="undo" class="math" onclick=undoChar()>&larr;</button>
+              </div>
+              <div class="sm-col col-xs-4">
+                <button id="equal" class="math" onclick=solveEqn()>=</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="calc-footer">
+          <p id="footnote">Created by Brian LeVay, May 2016<br>Built as part of the <a href="https://www.freecodecamp.com" target="_blank"> Free Code Camp</a> curriculum</p>
+        </div>
+      </div>
+    </div>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script src="js/index.js"></script>
+
+  </body>
+</html>

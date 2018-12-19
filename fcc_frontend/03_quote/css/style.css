@@ -1,0 +1,95 @@
+/* Comments here */
+
+body {
+  background-color: yellow;
+}
+
+#page-shell {
+  text-align: center;
+  padding-top: 80px;
+}
+
+#quote-shell {
+  display: inline-block;
+  margin: auto;
+  width: 40%;
+  max-width: 600px;
+  min-width: 300px;
+  background-color: white;
+  box-shadow: 5px 5px 10px #555;
+  border-radius: 15px;
+}
+
+#header-sect {
+  display: inline-block;
+  margin: auto;
+  width: 80%;
+  padding: 0.5em;
+}
+
+#header {
+  font-size: 2.0em;
+  font-weight: bold;
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+
+#quote-sect {
+  display: inline-block;
+  margin: auto;
+  width: 80%;
+  text-align: left;
+}
+
+#quote {
+}
+
+#author-sect {
+  display: inline-block;
+  margin: auto;
+  width: 80%;
+  text-align: right;
+}
+
+#button-sect {
+  display: inline-block;
+  margin: auto;
+  width: 80%;
+}
+
+#new-quote {
+  float: left;
+  height: 35px;
+  font-family: "Arial Black", Gadget, sans-serif;;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+  box-shadow: 1px 1px 2px #555;
+}
+
+#tweet-quote {
+  float: right;
+  background-color: #00aced;
+  color: white;
+}
+
+#footer-sect {
+  display: inline-block;
+  margin: auto;
+  width: 80%;
+}
+
+#attribution {
+  float: left;
+  font-size: 0.7em;
+}
+
+#created {
+  display: inline-block;
+  margin: auto;
+  width: 80%;
+}
+
+#creator {
+  font-size: 0.7em;
+  font-style: italic;
+}

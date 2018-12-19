@@ -1,0 +1,155 @@
+body {
+  font-family: "Gochi Hand", sans-serif;
+  background-color: #e9e7da;
+}
+
+#pageSect {
+  margin: auto;
+  width: 70%;
+}
+
+#headerSect {
+  margin: 10px;
+  text-align: center;
+  font-size: 4em;
+  font-weight: bold;
+}
+
+#footerSect {
+  margin: 10px;
+  text-align: center;
+  font-size: 1em;
+}
+#footerSect a {
+  color: black;
+}
+
+.recipeBox {
+  position: relative;
+  padding: 10px;
+  background-color: #636b46;
+  border: 10px inset #636b46;
+  border-radius: 5px;
+  box-shadow: 1px 1px 0px #636b46, 2px 2px 0px #636b46, 3px 3px 0px #636b46, 4px 4px 0px #636b46, 5px 5px 0px #636b46;
+}
+
+.addNew {
+  margin: 15px 0px 0px 0px;
+}
+
+.generalBtn, .addBtn, .resetBtn, .editBtn, .deleteBtn, .formBtn {
+  font-family: "Gochi Hand", sans-serif;
+  font-size: 1.2em;
+  border-style: outset;
+  border-width: 5px;
+}
+
+.addBtn {
+  background-color: #e9e7da;
+  color: black;
+  border-color: #e9e7da;
+}
+
+.resetBtn {
+  margin: 0px 0px 0px 10px;
+  background-color: #76323f;
+  color: white;
+  border-color: #76323f;
+}
+
+.recipeForm {
+  position: absolute;
+  top: 2%;
+  right: 1%;
+  width: 70%;
+  padding: 2%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px black;
+}
+
+.recipe {
+  margin: 2px 0px;
+  padding: 5px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.recipeName {
+  padding: 5px;
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: #cda34f;
+  border: 1px solid black;
+}
+
+.recipeContents {
+  padding: 5px;
+}
+
+.recipeSubTitle {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.ingredientList {
+  margin: 0px 0px 5px 0px;
+  padding: 5px;
+  outline: 1px solid gray;
+}
+
+.directions {
+  padding: 5px;
+  outline: 1px solid gray;
+}
+
+.editBtn {
+  width: 100px;
+  margin: 10px 10px 0px 0px;
+  background-color: #373f27;
+  color: white;
+  border-color: #373f27;
+}
+
+.deleteBtn {
+  width: 100px;
+  margin: 10px 0px 0px 0px;
+  background-color: #76323f;
+  color: white;
+  border-color: #76323f;
+}
+
+.formTitle {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.formBtn {
+  width: 100px;
+  margin: 5px 10px 0px 0px;
+  background-color: #373f27;
+  color: white;
+  border-color: #373f27;
+}
+
+.generalTextArea, .nameTextArea, .contentTextArea {
+  display: block;
+  width: 96%;
+  margin: 5px 0px;
+  resize: vertical;
+  font-family: "Gochi Hand", sans-serif;
+  font-size: 1em;
+}
+
+.nameTextArea {
+  height: 1.2em;
+}
+
+.contentTextArea {
+  height: 4.2em;
+}
+
+.notShown {
+  display: none;
+}

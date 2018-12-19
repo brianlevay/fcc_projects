@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Timer - FreeCodeCamp</title>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+
+    <div id="page" class="container-fluid">
+      <div id="content">
+        <div id="title" class="my-row">
+          <p id="title-text">Countdown Timer</p>
+        </div>
+        <div id="main" class="my-row">
+          <div id="time-sect" class="my-row">
+            <div id="min-adj-sect" class="my-col">
+              <div id="add-min-sect" class="my-row">
+                <button id="add-min" class="mod-btn" type="button" onClick="addMinutes()">+</button>
+              </div>
+              <div id="remove-min-sect" class="my-row">
+                <button id="remove-min" class="mod-btn" type="button" onClick="removeMinutes()">-</button>
+              </div>
+            </div>
+            <div id="timer-display" class="my-col">
+              <p id="timer"></p>
+            </div>
+            <div id="sec-adj-sect" class="my-col">
+              <div id="add-sec-sect" class="my-row">
+                <button id="add-sec" class="mod-btn" type="button" onclick="addSeconds()">+</button>
+              </div>
+              <div id="remove-sec-sect" class="my-row">
+                <button id="remove-sec" class="mod-btn" type="button" onclick="removeSeconds()">-</button>
+              </div>
+            </div>
+          </div>
+          <div id="control-sect" class="my-row">
+            <div id="start-sect" class="my-col">
+              <button id="start" class="ctl-btn" type="button" onclick="startTimer()">Start</button>
+            </div>
+            <div id="pause-sect" class="my-col">
+              <button id="pause" class="ctl-btn" type="button" onclick="pauseTimer()">Pause</button>
+            </div>
+            <div id="reset-sect" class="my-col">
+              <button id="reset" class="ctl-btn" type="button" onclick="resetTimer()">Reset</button>
+            </div>
+          </div>
+        </div>
+        <div id="progress-bar" class="my-row">
+          <div id="completed" class="my-col">
+          </div>
+          <div id="remaining" class="my-col">
+          </div>
+        </div>
+        <div id="footer" class="my-row">
+          <p>Created by Brian LeVay, May 2016</br>Built as part of the <a href="https://www.freecodecamp.com" target="_blank">Free Code Camp</a> curriculum</p>
+        </div>
+      </div>
+    </div>
+    
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

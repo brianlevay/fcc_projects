@@ -1,0 +1,160 @@
+//// Variables ////
+
+$bodyColor: #233237;
+$bodyFontColor: white;
+
+$gameBoardColor: white;
+
+$activeBtnColor: #984b43;
+$inactiveBtnColor: #eac67a;
+$activeBtnFontColor: white;
+$inactiveBtnFontColor: black;
+
+$cellWidth: 10px;
+$liveCellColor: #eac67a;
+$deadCellColor: black;
+
+//// These control the main static html sections ////
+
+body {
+  background-color: $bodyColor;
+  font-family: Arial, sans-serif;
+  color: $bodyFontColor;
+}
+
+#pageSect {
+  margin: auto;
+  text-align: center;
+}
+
+#headerSect {
+  margin: auto;
+  padding: 10px;
+  font-size: 2.8em;
+  font-weight: bold;
+  
+  a {
+    text-decoration: none;
+    color: $bodyFontColor;
+  }
+}
+
+#containerSect {
+  margin: auto;
+}
+
+#footerSect {
+  margin: auto;
+  padding: 10px;
+  font-size: 0.8em;
+  
+  a {
+    color: $bodyFontColor;
+  }
+}
+
+//// These control the control panel elements ////
+
+.controlPanel {
+  margin: auto;
+  padding: 10px;
+}
+
+.generalBtn {
+  display: inline-block;
+  width: 100px;
+  height: 20px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px black;
+  background-color: $inactiveBtnColor;
+  color: $inactiveBtnFontColor;
+  font-weight: bold;
+}
+
+.controlBtn {
+  @extend .generalBtn;
+  width: 100px;
+  height: 20px;
+}
+
+.generationCt {
+  padding: 2px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+//// These control the game board elements ////
+
+.gameBoard {
+  margin: auto;
+  padding: 10px;
+  font-size: 0em;
+  background-color: $gameBoardColor;
+  border: 1px solid black;
+  border-radius: 2px;
+  box-shadow: 2px 2px 2px black;
+}
+
+.cell {
+  display: inline-block;
+  width: $cellWidth;
+  height: $cellWidth;
+  outline: 1px solid black;
+}
+
+.s0 {
+  background-color: $deadCellColor;
+}
+
+.s1 {
+  background-color: $liveCellColor;
+}
+
+//// These control the setup panel elements ////
+
+.setupPanel {
+  margin: auto;
+  padding: 10px;
+}
+
+.boardSizeBtn {
+  @extend .generalBtn;
+  width: 120px;
+}
+
+.active {
+  color: $activeBtnFontColor;
+  background-color: $activeBtnColor;
+}
+
+//// These are class modifiers used to fix the sizes of the panels and board ////
+
+.smallBoard {
+  width: $cellWidth * 30;
+  height: $cellWidth * 30;
+}
+
+.mediumBoard {
+  width: $cellWidth * 50;
+  height: $cellWidth * 50;
+}
+
+.largeBoard {
+  width: $cellWidth * 80;
+  height: $cellWidth * 80;
+}
+
+.smallPanel {
+  width: $cellWidth * 30;
+}
+
+.mediumPanel {
+  width: $cellWidth * 50;
+}
+
+.largePanel {
+  width: $cellWidth * 80;
+}

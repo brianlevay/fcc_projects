@@ -1,0 +1,164 @@
+//// Variables ////
+
+$picWidth: 60px;
+$cellPaddingSide: 1%;
+$cellPaddingTop: 5px;
+$rankWidth: 10% - $cellPaddingSide*2;
+$camperWidth: 50% - $cellPaddingSide*2;
+$recentWidth: 20% - $cellPaddingSide*2;
+$totalWidth: 20% - $cellPaddingSide*2;
+$picDivWidth: 20%;
+$nameDivWidth: 50%;
+
+$pageColor: #0375b4;
+$rowTitleColor: #ffce00;
+$sortedColor: #262228;
+$notSortedColor: $rowTitleColor;
+$oddRowColor: #d9d9d9;
+$evenRowColor: white;
+
+$headerTextColor: white;
+$sortedTextColor: white;
+$notSortedTextColor: black;
+$footerTextColor: white;
+
+//// Element-level styles ////
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: $pageColor;
+}
+
+img {
+  display: inline-block;
+  width: $picWidth;
+  height: $picWidth;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+//// This creates the classes that are extended ////
+
+.row {
+  display: table;
+  width: 100%;
+}
+
+.cell {
+  display: table-cell;
+  height: 100%;
+  padding: $cellPaddingTop $cellPaddingSide $cellPaddingTop $cellPaddingSide;
+  text-align: center;
+  vertical-align: middle;
+  outline: 1px solid #4d4d4d;
+}
+
+.subCell {
+  display: inline-block;
+  margin: 0px 5px 0px 5px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+//// This styles the main fixed page sections ////
+
+#pageSect {
+  margin: auto;
+  width: 70%;
+}
+
+#headerSect {
+  width: 100%;
+  min-width: 400px;
+  padding: 15px 5px 25px 5px;
+  text-align: center;
+  font-size: 2.8em;
+  font-weight: bold;
+  color: $headerTextColor;
+  text-shadow: 1px 1px 1px black;
+} 
+
+#containerSect {
+  width: 100%;
+  min-width: 400px;
+  outline: 2px solid black;
+  box-shadow: 5px 5px 5px black;
+  
+  a {
+    color: black;
+  }
+}    
+ 
+#footerSect {
+  width: 100%;
+  min-width: 400px;
+  padding: 25px 5px 15px 5px;
+  text-align: center;
+  font-size: 0.8em;
+  color: $footerTextColor;
+  
+  a {
+    color: $footerTextColor;
+  }
+}
+
+//// These are the classes that are applied using React ////
+
+.rowTitle {
+  @extend .row;
+  font-weight: bold;
+  background-color: $rowTitleColor;
+}
+    
+.rowEntry {
+  @extend .row;
+  
+  &:nth-child(odd) {
+    background-color: $oddRowColor;
+  }
+  &:nth-child(even) {
+    background-color: $evenRowColor;
+  }
+}
+    
+.sortedBy {
+  color: $sortedTextColor;
+  background-color: $sortedColor;
+}
+
+.notSortedBy {
+  color: $notSortedTextColor;
+  background-color: $notSortedColor;
+}
+
+.rank {
+  @extend .cell;
+  width: $rankWidth;
+}
+
+.camper {
+  @extend .cell;
+  width: $camperWidth;
+  min-width: 200px;
+}
+
+.pic {
+  @extend .subCell;
+  width: $picDivWidth;
+  min-width: $picWidth;
+}
+
+.name {
+  @extend .subCell;
+  width: $nameDivWidth;
+}
+
+.recent {
+  @extend .cell;
+  width: $recentWidth;
+}
+
+.total {
+  @extend .cell;
+  width: $totalWidth;
+} 

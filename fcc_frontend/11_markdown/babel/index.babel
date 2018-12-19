@@ -1,0 +1,40 @@
+// This section uses React to continually updated the DOM as a user is typing into a text box.  This code below creates the virtual DOM section that holds both the input textarea and the displayed markup //
+
+var MarkedSection = React.createClass({
+  getInitialState: function() {
+    return {value: ''};
+  },
+  updateText: function(e) {
+    this.setState({value: e.target.value})
+  }, 
+  createMarkdown: function() {
+    var contents = this.state.value;
+    var cleaned = contents.replace(/[<>]/g,'');
+    var markedContents = marked(cleaned);
+    return { __html: markedContents };
+  },
+  render: function(){
+    return (
+      <div className="shell">
+        <div className="inputSect">
+          <span className="titleText">Enter Your Text Here</span>
+          <textarea className="textInput"
+            value={this.state.value}
+            onChange={this.updateText}
+            />
+        </div>
+        <div className="outputSect">
+          <span className="titleText">See It Styled Here</span>
+          <div dangerouslySetInnerHTML={this.createMarkdown()} />
+        </div>
+      </div>
+    );
+  }
+});
+
+// This renders the virtual DOM contents within the container section //
+
+ReactDOM.render(
+  <MarkedSection />,
+  document.getElementById('containerSect')
+);

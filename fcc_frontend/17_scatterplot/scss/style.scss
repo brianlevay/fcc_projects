@@ -1,0 +1,105 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #1e392a;
+  
+  #page {
+    width: 70%;
+    margin: auto;
+    padding: 0px 50px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 3px 3px 3px black;
+    
+    #header {
+      text-align: center;
+      padding: 20px;
+      
+      #mainTitle {
+        font-size: 40px;
+        font-weight: bold;
+        font-variant: small-caps;
+      }
+      
+      #subTitle {
+        font-size: 20px;
+        font-weight: bold;
+        font-variant: small-caps;
+      }
+      
+    }
+    
+    #chartSect {
+      
+      .chart {
+        background: #f5f5f5;
+        width: 100%;
+        height: 100%;
+        
+        /* Chart element styling */
+        
+        .keyBack {
+          fill: white;
+        }
+        
+        .keyLabel {
+          font-size: 12px;
+        }
+        
+        .dopedSymb {
+          fill: #3cc47c;
+        }
+          
+        .noDopedSymb {
+          fill: #1e392a;
+        }
+          
+        .labelBack {
+          fill: gray;
+          visibility: hidden;
+        }
+
+        .labelText {
+          fill: white;
+          font-size: 11px;
+          visibility: hidden;
+        }  
+          
+        .riderName {
+          font-size: 12px;
+          text-anchor: end;
+        }
+        
+        /* Axis styling */
+  
+        .axis {
+    
+          text {
+            font-size: 14px;
+          }
+    
+          path,line {
+            fill: none;
+            stroke: #000;
+          }
+        }
+        
+        .axisLabel {
+          font-size: 18px;
+          font-weight: bold;
+        }
+      }
+    }
+    
+    #footer {
+      padding: 20px 20px 20px 20px;
+      text-align: center;
+      font-size: 15px;
+      
+      a {
+        color: black;
+      }
+    }
+  }
+}
+

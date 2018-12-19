@@ -1,0 +1,104 @@
+/* Element-level styles */
+
+body {
+  background-color: #9fa9a3;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+form {
+  display: inline;
+}
+
+/* Class-level styles */
+
+.section {
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px;
+  width: 10%;
+  min-width: 100px;
+  border: 3px outset #c5d5c5;
+  font-weight: bold;
+  background-color: #c5d5c5;
+}
+
+.entry {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 3px 3px;
+  text-align: left;
+  background-color: #e3e0cc;
+  box-shadow: 3px 3px 3px #9fa9a3;
+}
+
+.entry a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.title-link {
+  font-size: 1.2em;
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.description {
+  padding-left: 20px;
+}
+
+/* ID-level styles */
+
+#page {
+  margin: auto;
+  margin-top: 50px;
+  padding: 5px;
+  width: 80%;
+  min-width: 600px;
+  border-radius: 10px 10px;
+  border: 1px solid black;
+  background-color: #f0f0f0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#title-sect {
+  font-size: 3em;
+  font-family: "Times New Roman", Times, serif;
+}
+
+#results-sect {
+}
+
+#footer-sect {
+  font-size: 0.8em;
+}
+
+#footer-sect a {
+  font-weight: bold;
+}
+
+#search-bar {
+  display: inline-block;
+  width: 30%;
+  height: 30px;
+  padding: 3px 10px 3px 10px;
+  border-radius: 10px;
+  border-style: inset;
+  border-color: #c5d5c5;
+  border-width: 3px;
+}
+
+#search-header {
+  font-size: 1.2em;
+  font-weight: bold;
+}
